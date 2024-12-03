@@ -558,6 +558,14 @@ class Database
     }
     /* ====================== Trang Chủ ============================ */
 
+    public function getBannerById($id)
+    {
+        $sql = "SELECT * FROM banners WHERE ID = :id";
+        $result = $this->pdo->prepare($sql);
+        $result->execute(['id' => $id]);
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+    
     function sp_moi($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1 ORDER BY ID DESC LIMIT :sl";
