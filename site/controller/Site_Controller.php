@@ -8,7 +8,10 @@ class Site_Controller
     }
     public function trang_chu()
     {
-
+        $banner_cho = $this->Database->getBannerById(3);
+        $banner_cho_2 = $this->Database->getBannerById(2);
+        $banner_meo = $this->Database->getBannerById(4);
+        $banner_meo_2 = $this->Database->getBannerById(1);
         $moi_arr = $this->Database->sp_moi(8);
         $km_arr = $this->Database->sp_km(8);
         $sp_cho_arr = $this->Database->sp_cho(8);
