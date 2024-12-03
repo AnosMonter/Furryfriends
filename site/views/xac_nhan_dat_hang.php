@@ -1,0 +1,1 @@
+<h1>Dơn hàng của bạn đã được ghi nhận. Shop sẽ liên lạc với bạn trong thời gian sơm nhất.</h1>

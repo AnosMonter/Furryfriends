@@ -1,0 +1,194 @@
+<style>
+    /* Cài đặt container */
+    .container {
+        width: 1440px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Hình ảnh tiêu đề */
+    .img {
+        width: 100%;
+        height: 300px;
+        background-image: url('../../public/img/image 1.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Tiêu đề căn giữa */
+    .chudangnhap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+    }
+
+    /* Hộp Đăng Nhập */
+    .box-login {
+        width: 800px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    /* Vị trí chữ Trang Chủ / Đăng NHẬP */
+    .header-text {
+        position: absolute;
+        top: -41%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        font-weight: bold;
+        color: #000000;
+        text-align: center;
+    }
+
+    /* Form Đăng Nhập */
+    .form-login {
+        padding: 20px;
+    }
+
+    .form-login p {
+        margin: 10px 0 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-login input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .form-login a {
+        color: #0066cc;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .form-login button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #000000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .form-login button[type="submit"]:hover {
+        background-color: #ea2113;
+    }
+
+    /* Văn bản phân cách */
+    .separator {
+        text-align: center;
+        color: #666;
+        font-size: 14px;
+        margin: 15px 0;
+    }
+
+    /* Nút Đăng Nhập Mạng Xã Hội */
+    .social-login {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .facebook,
+    .google {
+        flex: 1;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .facebook {
+        background-color: #4267B2;
+        margin-right: 10px;
+    }
+
+    .facebook:hover {
+        background-color: #365899;
+    }
+
+    .google {
+        background-color: #DB4437;
+    }
+
+    .google:hover {
+        background-color: #c13a2d;
+    }
+
+    .dangnhap {
+        display: flex;
+        /* Use flexbox */
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+        font-size: 16px;
+        font-weight: bold;
+        color: #000000;
+        text-align: center;
+        height: 100px;
+        /* Set a fixed height to ensure vertical centering */
+    }
+</style>
+
+<div class="img"></div>
+<div class="chudangnhap">
+    <h2>Đăng nhập</h2>
+</div>
+<div class="container">
+    <input type="checkbox" >
+    <div class="box-login">
+        <div class="header-text">
+            <p>Trang Chủ / Đăng nhập tài khoản</p>
+        </div>
+        <img width="400px"
+            src="../../public/img/lovepik-pet-shop-opening-cute-cartoon-cat-poster-background-image_605760002 1.png"
+            alt="">
+        <div class="form-login">
+            <form  action="">
+                <div class="dangnhap">
+                    <h2>Đổi mật khẩu|Đổi Thông tin</h2>
+                </div>
+                <p>MẬT KHẨU CŨ</p>
+                <input type="text" placeholder="Nhập mật khẩu cũ:">
+                <p>MẬT KHẨU MỚI</p>
+                <input type="text" placeholder="Mật Khẩu Mới:"> <br>
+                <p>XÁC NHẬN MẬT KHẨU MỚI</p>
+                <input type="text" placeholder="Mật Khẩu Mới:"> <br>
+                <button type="submit">XÁC NHẬN</button> <br>
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
