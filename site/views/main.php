@@ -35,11 +35,22 @@
     <div class="banner-section">
         <h2 class="banner-title">Mua sắm theo giống thú cưng</h2>
         <div class="banner-container">
+            <!-- Banner dành cho chó -->
             <div class="banner-left">
-                <a href="index.php?Page=tim_kiem&Search=chó"><img src="public/img/dog_banner.webp" alt="Dog Banner"></a>
+                <?php if (!empty($banner_cho)) : ?>
+                    <a href="index.php?Page=tim_kiem&Search=chó">
+                        <img src="<?= htmlspecialchars($banner_cho['Image']) ?>" alt="Dog Banner">
+                    </a>
+                <?php endif; ?>
             </div>
+
+            <!-- Banner dành cho mèo -->
             <div class="banner-right">
-                <a href="index.php?Page=tim_kiem&Search=mèo"><img src="public/img/cat_banner.webp" alt="Cat Banner"></a>
+                <?php if (!empty($banner_meo)) : ?>
+                    <a href="index.php?Page=tim_kiem&Search=mèo">
+                        <img src="<?= htmlspecialchars($banner_meo['Image']) ?>" alt="Cat Banner">
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -139,7 +150,7 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <img src="public/img/meo_img.jpg" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
+                <img src="<?= htmlspecialchars($banner_meo_2['Image']) ?>" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
                 <div class="all-products">
                     <h2 class="title_product">ĐỒ CHO CHÓ</h2>
                     <div class="products">
@@ -165,7 +176,7 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <img src="public/img/cho_img.jpg" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
+                    <img src="<?= htmlspecialchars($banner_cho_2['Image']) ?>" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Chó">
                 </div>
             </div>
         </div>
