@@ -835,15 +835,6 @@ footer {
     font-size: 1em;
 }
 
-.btn {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    background-color: #f3f3f3;
-    transition: background-color 0.3s;
-}
-
 #chi-tiet #row1 .tt1 {
     margin-left: 45px;
 }
