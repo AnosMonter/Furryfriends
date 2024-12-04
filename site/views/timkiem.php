@@ -23,10 +23,8 @@
                     </a>
                     <h3><a href="index.php?Page=chi_tiet&id=<?php echo $product['ID']; ?>"><?php echo $product['Name']; ?></a></h3>
                     <div class="item-price">
-                        <productan><?php echo number_format($product['Price'], 0, ',', '.'); ?> Đ</productan>
-                        <?php if ($product['Discount'] > 0): ?>
-                            <del><?php echo number_format($product['Discount'], 0, ',', '.'); ?> Đ</del>
-                        <?php endif; ?>
+                            <span><?php echo number_format($product['Discount'], 0, ',', '.'); ?> Đ</span>
+                            <del><?php echo number_format($product['Price'], 0, ',', '.'); ?> Đ</del>
                     </div>
                     <form action="index.php?Page=gio_hang" method="post">
                             <input type="hidden" name="ID" value="<?php echo $product['ID']; ?>">
