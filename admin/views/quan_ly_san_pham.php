@@ -1,4 +1,5 @@
 <main>
+    <h1>Quản Lý Sản Phẩm</h1>
     <div class="manager-product-container">
         <a class="Them_san_pham" href="admin.php?Page=them_san_pham">Thêm Sản Phẩm</a>
         <table border="1">
@@ -32,7 +33,7 @@
                 $List_Product .= '
                 <td>
                     <a href="admin.php?Page=sua_san_pham&ID=' . $Product['ID'] . '"><i class="fa-solid fa-pen-to-square"></i></a> |
-                    <a style="background-color:red;" href="admin.php?Page=xoa_san_pham&ID=' . $Product['ID'] . '"><i class="fa-solid fa-trash-can"></i></a>
+                    <a style="background-color:red;" href="admin.php?Page=xoa_san_pham&ID=' . $Product['ID'] . '" onclick="return confirm(\'Bạn có muốn xóa hay không?\')"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>';
             }
@@ -41,7 +42,7 @@
         </table>
         <div class="pagination">
             <?php
-            for ($i = 1; $i <= ceil(count($this->Import_Database->Get_All_Products()) / $Limit); $i++) {
+            for ($i = 1; $i <= count($this->Import_Database->Get_All_Products()) / $Limit; $i++) {
                 if (!isset($_GET['Page_Num'])) {
                     echo '<a class="Select" href="admin.php?Page=quan_ly_san_pham&Page_Num=' . $i . '">' . $i . '</a>';
                 } else if ($_GET['Page_Num'] == $i) {

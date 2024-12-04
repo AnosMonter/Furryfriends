@@ -8,10 +8,7 @@ class Site_Controller
     }
     public function trang_chu()
     {
-        $banner_cho = $this->Database->getBannerById(3);
-        $banner_cho_2 = $this->Database->getBannerById(2);
-        $banner_meo = $this->Database->getBannerById(4);
-        $banner_meo_2 = $this->Database->getBannerById(1);
+
         $moi_arr = $this->Database->sp_moi(8);
         $km_arr = $this->Database->sp_km(8);
         $sp_cho_arr = $this->Database->sp_cho(8);
@@ -64,19 +61,34 @@ class Site_Controller
         $TitlePage = 'Đăng Nhập';
         include_once 'site/model/dangnhap_dangky.php';
         $Log = new Dang_Nhap_Dang_Ky();
-        $Log->DangNhap();
+
+        $loi1 = [];
+
+        if (isset($_POST['dangnhap'])) {
+            $loi1 = $Log->DangNhap();
+        }
+
         $Views = 'site/views/login_register.php';
         include_once 'site/views/layout.php';
     }
+
+
     public function dang_ky()
     {
         $TitlePage = 'Đăng Ký';
         include_once 'site/model/dangnhap_dangky.php';
         $Register = new Dang_Nhap_Dang_Ky();
-        $Register->DangKy();
+
+        $loi = $Register->Validate_DK($_POST);
+
+        if (empty($loi)) {
+            $Register->DangKy();
+        }
+
         $Views = 'site/views/login_register.php';
         include_once 'site/views/layout.php';
     }
+
 
     public function dangky_step2()
     {
@@ -94,6 +106,8 @@ class Site_Controller
         $TitlePage = 'Chỉnh Sửa Thông Tin';
 
         $Infor_User = $this->Database->Get_Infor_User($_SESSION['User_login']['ID']);
+        $errors = [];
+
         if (isset($_POST['submit'])) {
             $id = $_POST['id_user'];
             $username = $_POST['username'];
@@ -101,11 +115,15 @@ class Site_Controller
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+
             include_once 'site/model/dangnhap_dangky.php';
             $update = new Dang_Nhap_Dang_Ky();
-            if (isset($Infor_User['Password']) && password_verify($password, $Infor_User['Password'])) {
+
+            $errors = $update->cap_nhat_thong_tin($id, $name, $username, $phone, $email);
+
+            if (empty($errors) && isset($Infor_User['Password']) && password_verify($password, $Infor_User['Password'])) {
                 $result = $update->cap_nhat_thong_tin($id, $name, $username, $phone, $email);
-                if (isset($result) && $result == true) {
+                if ($result) {
                     unset($_SESSION['User_login']);
                     $User = $this->Database->Get_Infor_User($Infor_User['ID']);
                     $_SESSION['User_login'] = ['ID' => $User['ID'], 'Name' => $User['Name'], 'Email' => $User['Email'], 'Role' => $User['Role']];
@@ -117,24 +135,28 @@ class Site_Controller
                 echo "<script>alert('Mật khẩu không đúng!');</script>";
             }
         }
+
         $Views = 'site/views/thaydoithongtin.php';
         include_once 'site/views/layout.php';
     }
+
     public function doi_mat_khau()
     {
         $TitlePage = 'Đổi Mật Khẩu';
-
         $Infor_User = $this->Database->Get_Infor_User($_SESSION['User_login']['ID']);
+        $errors = [];
 
         if (isset($_POST['submitdoimk'])) {
-            $old_password = $_POST['old_password'];
-            $new_password = $_POST['new_password'];
-            $confirm_password = $_POST['confirm_password'];
-            if (password_verify($old_password, $Infor_User['Password'])) {
-                if ($new_password === $confirm_password) {
-                    include_once 'site/model/dangnhap_dangky.php';
-                    $update = new Dang_Nhap_Dang_Ky();
-                    $result = $update->cap_nhat_mat_khau($_SESSION['User_login']['ID'], password_hash($new_password, PASSWORD_DEFAULT));
+            include_once 'site/model/dangnhap_dangky.php';
+            $validate = new Dang_Nhap_Dang_Ky();
+            $errors = $validate->Validate_TDMK($_POST);
+
+            if (empty($errors)) {
+                $old_password = $_POST['old_password'];
+                $new_password = $_POST['new_password'];
+
+                if (password_verify($old_password, $Infor_User['Password'])) {
+                    $result = $validate->cap_nhat_mat_khau($_SESSION['User_login']['ID'], password_hash($new_password, PASSWORD_DEFAULT));
 
                     if ($result) {
                         echo "<script>alert('Đổi mật khẩu thành công!');</script>";
@@ -142,12 +164,11 @@ class Site_Controller
                         echo "<script>alert('Đổi mật khẩu thất bại!');</script>";
                     }
                 } else {
-                    echo "<script>alert('Mật khẩu mới không khớp!');</script>";
+                    $errors['old_password'] = "Mật khẩu cũ không đúng!";
                 }
-            } else {
-                echo "<script>alert('Mật khẩu cũ không đúng!');</script>";
             }
         }
+
         $Views = 'site/views/thaydoithongtin.php';
         include_once 'site/views/layout.php';
     }
@@ -210,10 +231,10 @@ class Site_Controller
         $id = $_GET['id'];
         $page_size = 8;
         $page_num = 1;
-        if(isset($_GET['page_num']) == true) $page_num = $_GET['page_num'];
+        if (isset($_GET['page_num']) == true) $page_num = $_GET['page_num'];
         $dm_sp_arr = $this->Database->sp_dm($id, $page_size, $page_num);
         $so_record = $this->Database->dm_dem($id);
-        $so_trang = ceil($so_record/$page_size);
+        $so_trang = ceil($so_record / $page_size);
         $TitlePage = 'Sản phẩm theo danh mục';
         $Views = 'site/views/sp_danh_muc.php';
         include_once 'site/views/layout.php';
@@ -237,11 +258,11 @@ class Site_Controller
             $keyword = $_GET['Search'];
             $page_size = 8;
             $page_num = 1;
-            if(isset($_GET['page_num'])==true) $page_num = $_GET['page_num'];
+            if (isset($_GET['page_num']) == true) $page_num = $_GET['page_num'];
             $min_price = isset($_GET['min_price']) ? (float)$_GET['min_price'] : 0;
             $max_price = isset($_GET['max_price']) ? (float)$_GET['max_price'] : PHP_INT_MAX;
             $sort_price = isset($_GET['sort_price']) ? $_GET['sort_price'] : 'ASC';
-    
+
             $results = $this->Database->tim_kiem_sp($keyword, $min_price, $max_price, $page_size, $page_num, $sort_price);
             $so_record = $this->Database->tim_kiem_dem($keyword, $min_price, $max_price);
             $so_trang = ceil($so_record / $page_size);
@@ -303,7 +324,7 @@ class Site_Controller
             ];
         }
         unset($_SESSION['myCart']['infoOrder']);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['ID'] != null){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['ID'] != null) {
             $ID = $_POST['ID'];
             $Name = $_POST['Name'];
             $Image = $_POST['Image'];

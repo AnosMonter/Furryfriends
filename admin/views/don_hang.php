@@ -1,4 +1,5 @@
 <main>
+    <h1>Quản Lý Đơn Hàng</h1>
     <table border="1" class="Table-Order-Manager">
         <tr>
             <th>ID Hóa Đơn</th>

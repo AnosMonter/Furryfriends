@@ -1,5 +1,6 @@
 <style>
     form {
+    width: 100%;
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 10px;
@@ -39,6 +40,7 @@ input[type="submit"]:hover {
 }
 </style>
 <main>
+    <h1>Sửa Sản Phẩm</h1>
     <form action="admin.php?Page=sua_san_pham&ID=<?php echo $product['ID']; ?>" method="post" enctype="multipart/form-data">
         <label for="name">Tên sản phẩm:</label>
         <input type="text" id="name" name="name" value="<?php echo $product['Name']; ?>" required>

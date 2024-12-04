@@ -1,11 +1,18 @@
 <style>
     form {
-        width: 400px;
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    form h2{
+        width: 100%;
     }
 
     label {

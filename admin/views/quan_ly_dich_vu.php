@@ -73,5 +73,18 @@
             echo $List_Service;
             ?>
         </table>
+        <div class="pagination">
+        <?php
+        for ($i = 1; $i <= count($this->Import_Database->Get_All_Orders()) / $limit; $i++) {
+            if (!isset($_GET['Page_Num'])) {
+                echo '<a class="Select" href="admin.php?Page=quan_ly_dich_vu&Page_Num=' . $i . '">' . $i . '</a>';
+            } else if ($_GET['Page_Num'] == $i) {
+                echo '<a class="Select" href="admin.php?Page=quan_ly_dich_vu&Page_Num=' . $i . '">' . $i . '</a>';
+            } else {
+                echo '<a href="admin.php?Page=quan_ly_dich_vu&Page_Num=' . $i . '">' . $i . '</a>';
+            }
+        }
+        ?>
+    </div>
     </div>
 </main>

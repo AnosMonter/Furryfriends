@@ -1,11 +1,17 @@
 <style>
     form {
-        width: 600px;
-        /* Adjust width as needed */
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    form h1{
+        width: 100%;
     }
 
     label {
@@ -32,10 +38,12 @@
     }
 
     input[type="file"] {
-        margin-bottom: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px;
     }
 
-    button[type="submit"] {
+    input[type="submit"] {
         background-color: #4CAF50;
         color: white;
         padding: 10px 20px;
@@ -51,7 +59,11 @@
     }
 </style>
 <main>
+    <?php
+    include_once 'system/lib/ckeditor5-builder-44.0.0/ckeditor.php';
+    ?>
     <form action="admin.php?Page=them_san_pham" method="post" enctype="multipart/form-data">
+    <h1>Thêm Sản Phẩm</h1>
         <label for="name">Tên sản phẩm:</label>
         <input type="text" id="name" name="name" required>
         <?= isset($nameError) ? '<p class="Error">' . $nameError . '</p>' : '' ?>
@@ -73,8 +85,7 @@
         <?= isset($descriptionError) ? '<p class="Error">' . $descriptionError . '</p>' : '' ?>
 
         <label for="detail">Mô tả chi tiết:</label>
-        <textarea id="detail" name="detail" id="mota">
-            <p></p>
+        <textarea name="detail" id="mota">
         </textarea>
         <?= isset($detailError) ? '<p class="Error">' . $detailError . '</p>' : '' ?>
 
@@ -101,60 +112,6 @@
             ?>
         </select>
         <?= isset($categoryError) ? '<p class="Error">' . $categoryError . '</p>' : '' ?>
-
         <input type="submit" value="Thêm Sản Phẩm">
     </form>
-    <script src="system/lib/ckeditor5-44.0.0/ckeditor5/ckeditor5.js"></script>
-    <script>
-        const {
-            ClassicEditor,
-            Essentials,
-            Paragraph,
-            Bold,
-            Italic,
-            Font
-        } = CKEDITOR;
-        ClassicEditor.create(document.querySelector('#mota'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor.create(document.querySelector('#mota'), {
-                language: 'vi'
-            })
-            .then(editor => {})
-            .catch(error => {
-                console.error(error)
-            });
-        ClassicEditor.create(document.querySelector('#mota'), {
-                language: 'vi',
-                ckfinder: {
-                    uploadUrl: 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-                },
-                toolbar: {
-                    items: [
-                        'fontfamily', 'fontsize', '|',
-                        'heading', '|',
-                        'alignment', '|',
-                        'fontColor', 'fontBackgroundColor', '|',
-                        'bold', 'italic', 'underline', 'subscript', 'superscript', '|',
-                        'link', '|',
-                        'outdent', 'indent', '|',
-                        'bulletedList', 'numberedList', 'todoList', '|',
-                        'code', 'codeBlock', '|',
-                        'insertTable', '|',
-                        'uploadImage', '|',
-                        'ckfinder',
-                        'undo', 'redo'
-                    ],
-                    shouldNotGroupWhenFull: true
-                }
-            })
-            .then(editor => {})
-            .catch(error => {
-                console.error(error)
-            });
-    </script>
 </main>

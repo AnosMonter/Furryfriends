@@ -22,7 +22,7 @@
                     <td><img class="category-image" width="100px" height="100px" src="' . (substr($category['Image'], 0, 4) == 'http' ? $category['Image'] : $category['Image']) . '" alt="' . $category['Name'] . '"></td>
                     <td>
                         <a href="admin.php?Page=sua_danh_muc&ID=' . $category['ID'] . '" class="btn-edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="admin.php?Page=xoa_danh_muc&ID=' . $category['ID'] . '" class="btn-delete"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="admin.php?Page=xoa_danh_muc&ID=' . $category['ID'] . '" class="btn-delete" onclick="return confirm(\'Bạn có muốn xóa hay không?\')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>';
             }
@@ -32,7 +32,7 @@
     </table>
     <div class="pagination">
             <?php
-            for ($i = 1; $i <= ceil(count($this->Import_Database->Get_All_Category()) / $limit); $i++) {
+            for ($i = 1; $i <= count($this->Import_Database->Get_All_Category()) / $limit; $i++) {
                 if (!isset($_GET['Page_Num'])) {
                     echo '<a class="Select" href="admin.php?Page=quan_ly_danh_muc&Page_Num=' . $i . '">' . $i . '</a>';
                 } else if ($_GET['Page_Num'] == $i) {

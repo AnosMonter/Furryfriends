@@ -35,28 +35,17 @@
     <div class="banner-section">
         <h2 class="banner-title">Mua sắm theo giống thú cưng</h2>
         <div class="banner-container">
-            <!-- Banner dành cho chó -->
             <div class="banner-left">
-                <?php if (!empty($banner_cho)) : ?>
-                    <a href="index.php?Page=tim_kiem&Search=chó">
-                        <img src="<?= htmlspecialchars($banner_cho['Image']) ?>" alt="Dog Banner">
-                    </a>
-                <?php endif; ?>
+                <a href="index.php?Page=tim_kiem&Search=chó"><img src="public/img/dog_banner.webp" alt="Dog Banner"></a>
             </div>
-
-            <!-- Banner dành cho mèo -->
             <div class="banner-right">
-                <?php if (!empty($banner_meo)) : ?>
-                    <a href="index.php?Page=tim_kiem&Search=mèo">
-                        <img src="<?= htmlspecialchars($banner_meo['Image']) ?>" alt="Cat Banner">
-                    </a>
-                <?php endif; ?>
+                <a href="index.php?Page=tim_kiem&Search=mèo"><img src="public/img/cat_banner.webp" alt="Cat Banner"></a>
             </div>
         </div>
     </div>
 
     <div class="categories-section">
-        <h2 class="category-title">Bộ Sưu Tập Cho Mèo Và Chó</h2>
+        <h2 class="category-title">Danh Mục</h2>
         <div class="category-container">
             <?php foreach ($dm_arr as $dm): ?>
                 <div class="cate-item">
@@ -79,7 +68,7 @@
                         <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                             <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                         </a>
-                        <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                        <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
                         <div class="item-price">
                             <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                             <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -107,7 +96,7 @@
                         <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                             <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                         </a>
-                        <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                        <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
                         <div class="item-price">
                             <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                             <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -133,7 +122,7 @@
                             <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                                 <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                             </a>
-                            <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                            <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
                             <div class="item-price">
                                 <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                                 <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -150,7 +139,7 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <img src="<?= htmlspecialchars($banner_meo_2['Image']) ?>" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
+                <img src="public/img/meo_img.jpg" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
                 <div class="all-products">
                     <h2 class="title_product">ĐỒ CHO CHÓ</h2>
                     <div class="products">
@@ -159,7 +148,7 @@
                                 <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                                     <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                                 </a>
-                                <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                                <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
                                 <div class="item-price">
                                     <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                                     <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -176,16 +165,16 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <img src="<?= htmlspecialchars($banner_cho_2['Image']) ?>" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Chó">
+                    <img src="public/img/cho_img.jpg" style="width: 90%; height: auto; margin: 20px 20px;" alt="Banner Mèo">
                 </div>
             </div>
         </div>
     </div>
 
     <div class="home-news-container">
-        <h2 class="title_product">Tin Tức Nhanh</h2>
+        <h2 class="title_product">Bài Viết Mới</h2>
         <div class=" news ">
-            <?php foreach ($this->Database->Bai_Viet_Ngau_Nhien(3) as $row) {  ?>
+            <?php foreach ($this->Database->Get_News_Create_Limit(3) as $row) {  ?>
                 <div class="bv article-item" id="data" class="article-item">
                     <a href="#" class="image">
                         <img src="<?php if (substr($row['Image'], 0, 4) == "http") echo $row['Image'];

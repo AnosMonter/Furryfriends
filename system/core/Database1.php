@@ -19,6 +19,14 @@ class Database
         return $this->pdo == true ? 'Success' : 'Error';
     }
     /* ====================== Hóa Đơn ============================ */
+
+    public function Change_Status_Odder($id,$status){
+        $stmt = $this->pdo->prepare("UPDATE orders SET Status_Order = :status WHERE ID = :id");
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
     public function Select_All_Order(){
         $stmt = $this->pdo->prepare("SELECT * FROM orders");
         $stmt->execute();

@@ -76,6 +76,7 @@ td img {
 }
 </style>
 <main>
+    <h1>Quản Lý Tin Tức</h1>
     <a class="Them_bai_viet" href="admin.php?Page=them_bai_viet">Thêm Tin Tức</a>
     <table border="1">
         <tr>
@@ -106,7 +107,7 @@ td img {
             $List_News .= '
                 <td>
                     <a href="admin.php?Page=sua_bai_viet&ID=' . $News['ID'] . '"><i class="fa-solid fa-pen-to-square"></i></a> |
-                    <a href="admin.php?Page=xoa_bai_viet&ID=' . $News['ID'] . '"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="admin.php?Page=xoa_bai_viet&ID=' . $News['ID'] . '" onclick="return confirm(\'Bạn có muốn xóa hay không?\')"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>';
         }

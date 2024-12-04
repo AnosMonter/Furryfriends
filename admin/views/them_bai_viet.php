@@ -1,7 +1,6 @@
 <style>
     form {
-        width: 600px;
-        /* Adjust width as needed */
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -51,6 +50,7 @@
     }
 </style>
 <main>
+    <h1>Thêm Bài Viết</h1>
     <form action="admin.php?Page=them_bai_viet" method="post" enctype="multipart/form-data">
         <h1>Thêm Bài Viết</h1>
         <label for="name">Tên Bài Viết:</label>

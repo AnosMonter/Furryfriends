@@ -55,7 +55,7 @@
 
     <div class="pagination">
         <?php
-        for ($i = 1; $i <= ceil(count($this->Import_Database->Get_All_User()) / $Limit); $i++) {
+        for ($i = 1; $i <= count($this->Import_Database->Get_All_User()) / $Limit; $i++) {
             if (!isset($_GET['Page_Num'])) {
                 echo '<a class="Select" href="admin.php?Page=quan_ly_san_pham&Page_Num=' . $i . '">' . $i . '</a>';
             } else if ($_GET['Page_Num'] == $i) {
