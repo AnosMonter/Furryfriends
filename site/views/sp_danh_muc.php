@@ -7,7 +7,7 @@
                     <a href="index.php?Page=chi_tiet&id=<?php echo $dm_sp['ID']; ?>">
                         <img src="<?php echo $dm_sp['Image']; ?>" alt="<?php echo $dm_sp['Name']; ?>">
                     </a>
-                    <h3><a href="index.php?Page=chi_tiet&id=<?php echo $dm_sp['ID']; ?>"><?php echo $dm_sp['Name']; ?></a></h3>
+                    <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $dm_sp['ID']; ?>"><?php echo $dm_sp['Name']; ?></a></h3></div>
                     <div class="item-price">
                         <span><?php echo number_format($dm_sp['Price'], 0, ',', '.'); ?> Đ</span>
                         <?php if ($dm_sp['Discount'] > 0): ?>
