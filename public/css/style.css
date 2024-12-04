@@ -931,62 +931,67 @@ footer {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    gap: 5px;
+    gap: 10px;
 }
 
 #btn-decrease,
 #btn-increase,
 #quantity {
-    border: 1px solid #ccc;
-    /* Viền cho các ô */
-    padding: 5px 10px;
-    /* Khoảng cách bên trong */
+    border: 1px solid #ccc; /* Viền cho các ô */
+    padding: 5px 12px; /* Khoảng cách bên trong */
     font-size: 16px;
     text-align: center;
-    background-color: transparent;
-    /* Không có nền */
+    background-color: transparent; /* Không có nền */
+    border-radius: 5px; /* Bo góc nhẹ */
 }
 
 #quantity {
-    width: 50px;
-    /* Đặt chiều rộng của ô số lượng */
+    width: 60px; /* Đặt chiều rộng của ô số lượng */
     font-size: 16px;
-    border-left: none;
-    border-right: none;
+    border-left: none; /* Xóa viền trái */
+    border-right: none; /* Xóa viền phải */
+    text-align: center;
+    color: #333;
 }
 
 #btn-decrease {
     cursor: pointer;
+    background-color: #f9f9f9;
 }
 
 #btn-increase {
     cursor: pointer;
+    background-color: #f9f9f9;
 }
 
 #btn-decrease:hover,
 #btn-increase:hover {
-    background-color: #f0f0f0;
-    /* Màu nền khi hover */
+    background-color: #f0f0f0; /* Màu nền khi hover */
+    transform: scale(1.1);
 }
 
 .btn-add-cart-detail {
     padding: 10px 20px;
-    background-color: #2687F9;
-    /* Màu nền của nút */
+    background-color: #2687F9; /* Màu nền của nút */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-left: 20px;
-    /* Khoảng cách giữa nút và ô tăng giảm */
+    gap: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+    margin-left: 30px; /* Khoảng cách giữa nút và ô tăng giảm */
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-add-cart-detail:hover {
     background-color: #0055cc;
-    /* Màu nền khi hover */
+    transform: scale(1.05);
+}
+
+.btn-add-cart-detail i {
+    font-size: 18px; /* Tăng kích thước biểu tượng giỏ hàng */
 }
 
 /* responsive */
