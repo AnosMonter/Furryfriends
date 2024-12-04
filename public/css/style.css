@@ -624,6 +624,7 @@ footer {
     height: 500px;
     border: 2px solid lightgray;
     padding: 8px;
+    font-size: 19px;
 }
 
 .product-item img {
@@ -641,15 +642,23 @@ footer {
     height: 25px;
     margin-bottom: 30px;
 }
-
+.item-name{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    height: 2.8em;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
 .item-price {
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .item-price span {
     font-weight: 700;
-    font-size: large;
 }
 
 .item-price del {
@@ -988,18 +997,38 @@ footer {
     }
 }
 
+.title_comment {
+    background-color: #F7941D;
+    color: white;
+    margin: 20px 30px;
+    padding: 10px 30px;
+    display: inline-block;
+    border-radius: 50px;
+    text-align: center;
+    width: 400px;
+}
+
 #binh-luan {
     margin: 30px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
+    text-align: center;
 }
 
 #binh-luan .comm-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    min-height: 100px;
+}
+
+#binh-luan .comm-container.no-comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 #binh-luan .comment {
@@ -1019,6 +1048,12 @@ footer {
 #binh-luan .comment strong {
     font-size: 1.1em;
     color: #333;
+}
+
+#binh-luan .notCmt {
+    font-size: 1.2em;
+    color: #888;
+    font-weight: 700;
 }
 
 /* Responsive styling */
