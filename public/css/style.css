@@ -604,6 +604,7 @@ footer {
     background-color: #2687F9;
     font-weight: bold;
 }
+
 /* ================================== Product Item =================================*/
 .products {
     display: grid;
@@ -728,7 +729,17 @@ footer {
         font-size: 1em;
     }
 }
-
+/* ================================== tìm kiếm ===================================== */
+.kq-timkiem .no-results{
+    text-align: center;
+}
+.no-results {
+    font-size: 20px; /* Điều chỉnh kích thước chữ hợp lý */
+    color: #333; /* Màu chữ đậm hơn, dễ đọc */
+    text-align: center; /* Căn giữa văn bản */
+    margin: 20px auto; /* Căn giữa và tạo khoảng cách */
+    font-weight: 700;
+}
 .kq-timkiem h2 {
     background-color: #F7941D;
     color: white;
