@@ -9,37 +9,57 @@ class Dang_Nhap_Dang_Ky
     }
 
     public function DangNhap()
-    {
-        if (isset($_POST['dangnhap']) && !empty($_POST['dangnhap'])) {
-            $email = $_POST['Email'];
-            $pass = $_POST['Pass'];
-            if (empty($email) || empty($pass)) {
-                echo "<script>alert('Vui lòng điền đầy đủ thông tin!')</script>";
-                return;
-            }
-            $db = new Database();
-            $sql = "SELECT * FROM users WHERE Email = :email";
-            $stmt = $db->pdo->prepare($sql);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
+{
+    $errors = [];
 
-            if ($stmt->rowCount() > 0) {
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if (password_verify($pass, $row['Password'])) {
-                    $User = ['ID' => $row['ID'], 'Name' => $row['Name'], 'Email' => $row['Email'], 'Role' => $row['Role']];
-                    $_SESSION['User_login'] = $User;
-                    echo "<script>alert('Đăng nhập thành công')</script>";
+    if (isset($_POST['dangnhap']) && !empty($_POST['dangnhap'])) {
+        $email = $_POST['Email'];
+        $pass = $_POST['Pass'];
+
+        $validationErrors = $this->Validate_DN(['Email' => $email, 'Mat_khau' => $pass]);
+        if (!empty($validationErrors)) {
+            return $validationErrors;
+        }
+
+        $db = new Database();
+        $sql = "SELECT * FROM users WHERE Email = :email";
+        $stmt = $db->pdo->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($pass, $row['Password'])) {
+                if ($row['Status'] == 1) {
+                    $user = ['ID' => $row['ID'], 'Name' => $row['Name'], 'Email' => $row['Email'], 'Role' => $row['Role']];
+                    $_SESSION['User_login'] = $user;
                     header("Location: index.php");
                     exit();
                 } else {
-                    echo "<script>alert('Sai email hoặc mật khẩu')</script>";
+                    $errors['Status'] = "Tài khoản đã bị khoá!";
                 }
             } else {
-                echo "<script>alert('Sai email hoặc mật khẩu')</script>";
+                $errors['Credentials'] = "Sai email hoặc mật khẩu!";
             }
+        } else {
+            $errors['Credentials'] = "Sai email hoặc mật khẩu!";
         }
     }
+    return $errors;
+}
 
+    public function Validate_DN($user) {
+        $loi1 = [];
+
+        if ($user['Email'] == "") {
+            $loi1['Email'] = "Chưa nhập Email";
+        }
+
+        if ($user['Mat_khau'] == "") {
+            $loi1['Mat_khau'] = "Chưa nhập mật khẩu";
+        }
+        return $loi1;
+    }
     public function DangKy()
     {
         if (isset($_POST['dangky']) && !empty($_POST['dangky'])) {
@@ -47,14 +67,12 @@ class Dang_Nhap_Dang_Ky
             $tenhienthi = $_POST['Ten_hien_thi'];
             $sdt = $_POST['So_dien_thoai'];
             $email = $_POST['Email'];
-            $pass = $_POST['Mat_khau']; // Lưu mật khẩu gốc để kiểm tra
-            $hashed_pass = password_hash($pass, PASSWORD_DEFAULT); // Mã hóa mật khẩu
+            $pass = $_POST['Mat_khau']; 
+            $hashed_pass = password_hash($pass, PASSWORD_DEFAULT); 
             $role = 0;
             $status = 1;
 
-            // Kiểm tra nếu thông tin không rỗng
             if (empty($username) || empty($sdt) || empty($email) || empty($pass) || empty($tenhienthi)) {
-                echo "<script>alert('Vui lòng điền đầy đủ thông tin!')</script>";
                 return;
             }
 
@@ -96,27 +114,68 @@ class Dang_Nhap_Dang_Ky
             } elseif ($stmt_check_email->rowCount() > 0) {
                 echo "<script>alert('Email đã tồn tại!')</script>";
             } else {
-                // Tạo mã xác nhận
                 $code = rand(100000, 999999);
-                setcookie('Code_Register', $code, time() + 300); // Lưu mã vào cookie 5 phút
+                setcookie('Code_Register', $code, time() + 300); 
                 setcookie('Register_Data', json_encode(compact('username', 'tenhienthi', 'sdt', 'email', 'hashed_pass', 'role', 'status')), time() + 300);
 
-                // Gửi email
                 include_once 'system/lib/master/Sent_Mail.php';
-                Sent_Emal($email, 'Xác nhận đăng ký tài khoản', "Mã xác nhận của bạn là: $code. Mã có hiệu lực trong 5 phút.");
+                Sent_Emal($email, 'Xác nhận đăng ký tài khoản', "
+                                    Furry Friends 
+
+                                    Xin chào,
+
+                                    Cảm ơn bạn đã đăng ký tài khoản tại Furry Friends!
+
+                                    Mã xác nhận của bạn là: $code
+
+                                    Mã này có hiệu lực trong 5 phút. Vui lòng sử dụng mã để hoàn tất quá trình xác nhận tài khoản của bạn.
+
+                                    Nếu bạn không yêu cầu đăng ký tài khoản, vui lòng bỏ qua email này.
+
+                                    Trân trọng,
+                                    Đội ngũ Furry Friends
+                                    ");
+
                 echo "<script>alert('Mã xác nhận đã được gửi đến email của bạn. Vui lòng kiểm tra!');</script>";
-                header("Location: index.php?Page=dangky_step2"); // Chuyển sang form nhập mã xác nhận
+                header("Location: index.php?Page=dangky_step2"); 
             }
         }
     }
 
-
+    public function Validate_DK($user) {
+        $loi = [];
+    
+        if ($user['Ten'] == "") {
+            $loi['Ten'] = "Chưa nhập tên người dùng";
+        }
+    
+        if ($user['Ten_hien_thi'] == "") {
+            $loi['Ten_hien_thi'] = "Chưa nhập tên hiển thị";
+        }
+    
+        if ($user['So_dien_thoai'] == "") {
+            $loi['So_dien_thoai'] = "Chưa nhập số điện thoại";
+        }
+    
+        if ($user['Email'] == "") {
+            $loi['Email'] = "Chưa nhập email";
+        } else if (!filter_var($user['Email'], FILTER_VALIDATE_EMAIL)) {
+            $loi['Email'] = "Email không hợp lệ";
+        }
+    
+        if ($user['Mat_khau'] == "") {
+            $loi['Mat_khau'] = "Chưa nhập mật khẩu";
+        } else if (strlen($user['Mat_khau']) < 8) {
+            $loi['Mat_khau'] = "Mật khẩu phải có ít nhất 8 ký tự";
+        }    
+        return $loi;
+    }
+    
     public function DangKyStep2()
     {
         if (isset($_POST['xacnhan']) && !empty($_POST['xacnhan'])) {
             $ma_xac_nhan = $_POST['Ma_xac_nhan'];
             if (isset($_COOKIE['Code_Register']) && $_COOKIE['Code_Register'] == $ma_xac_nhan) {
-                // Nếu mã xác nhận đúng, đăng ký tài khoản
                 $register_data = json_decode($_COOKIE['Register_Data'], true);
                 $db = new Database();
                 $sql_insert = "INSERT INTO users (Username, Password, Name, Phone, Email, Role, Status) 
@@ -143,6 +202,11 @@ class Dang_Nhap_Dang_Ky
     }
     public function cap_nhat_thong_tin($id, $name, $username, $phone, $email)
     {
+        if (empty($name) || empty($username) || empty($phone) || empty($email)) {
+            echo "<script>alert('Vui lòng điền đầy đủ thông tin!')</script>";
+            return false;
+        }
+
         $query = "UPDATE users SET Name = :name, Username = :username, Phone = :phone, Email = :email WHERE ID = :id";
         $stmt = $this->db->pdo->prepare($query);
         $stmt->bindValue(':name', $name);
@@ -152,6 +216,34 @@ class Dang_Nhap_Dang_Ky
         $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
+
+    public function Validate_CN($user){
+        $loi3 = [];
+    
+        if ($user['Ten'] == "") {
+            $loi3['Ten'] = "Không được bỏ trống tên";
+        }
+        
+        if ($user['Email'] == "") {
+            $loi3['Email'] = "Chưa nhập email";
+        } else if (!filter_var($user['Email'], FILTER_VALIDATE_EMAIL)) {
+            $loi3['Email'] = "Email không hợp lệ";
+        }
+    
+        if ($user['So_dien_thoai'] == "") {
+            $loi3['So_dien_thoai'] = "Chưa nhập số điện thoại";
+        }
+    
+        if ($user['Ten_hien_thi'] == "") {
+            $loi3['Ten_hien_thi'] = "Không được bỏ trống tên hiển thị";
+        }
+    
+        if ($user['Mat_khau'] == "") {
+            $loi3['Mat_khau'] = "Chưa nhập mật khẩu";  
+        }
+        return $loi3;
+    }
+
     public function cap_nhat_mat_khau($ID, $new_password)
     {
         $query = "UPDATE users SET Password = :password WHERE ID = :ID";
@@ -160,4 +252,26 @@ class Dang_Nhap_Dang_Ky
         $stmt->bindValue(':ID', $ID);
         return $stmt->execute();
     }
+    public function Validate_TDMK($user) {
+        $loi2 = [];
+    
+        if (empty($user['old_password'])) {
+            $loi2['old_password'] = "Chưa nhập mật khẩu cũ";
+        }
+    
+        if (empty($user['new_password'])) {
+            $loi2['new_password'] = "Chưa nhập mật khẩu mới";
+        } elseif (strlen($user['new_password']) < 8) {
+            $loi2['new_password'] = "Mật khẩu mới phải có ít nhất 8 ký tự";
+        }
+    
+        if (empty($user['confirm_password'])) {
+            $loi2['confirm_password'] = "Chưa nhập xác nhận mật khẩu";
+        } elseif ($user['new_password'] !== $user['confirm_password']) {
+            $loi2['confirm_password'] = "Xác nhận mật khẩu không khớp";
+        }
+    
+        return $loi2;
+    }
+    
 }

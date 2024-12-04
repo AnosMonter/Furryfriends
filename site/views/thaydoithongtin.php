@@ -1,6 +1,6 @@
 <main>
     <div class="Container">
-        <input type="checkbox" id="Log-Reg">
+    <input type="checkbox" id="Log-Reg" <?= !empty($errors) ? 'checked' : '' ?>>
         <div class="box-login">
             <img width="400px"
                 src="public/img/Log_reg.jpg"
@@ -37,13 +37,16 @@
                             <div class="Login" style="font-weight: bolder;">Đổi Mật Khẩu</div>
                         </div>
                         <p>MẬT KHẨU CŨ</p>
-                        <input type="password" name="old_password" placeholder="Nhập mật khẩu cũ:" required><br>
+                        <input type="password" name="old_password" placeholder="Nhập mật khẩu cũ:">
+                        <span class="error"><?php echo $errors['old_password'] ?? ''; ?></span><br>
 
                         <p>MẬT KHẨU MỚI</p>
-                        <input type="password" name="new_password" placeholder="Mật Khẩu Mới:" required><br>
+                        <input type="password" name="new_password" placeholder="Mật Khẩu Mới:">
+                        <span class="error"><?php echo $errors['new_password'] ?? ''; ?></span><br>
 
                         <p>XÁC NHẬN MẬT KHẨU MỚI</p>
-                        <input type="password" name="confirm_password" placeholder="Xác nhận mật khẩu mới:" required><br>
+                        <input type="password" name="confirm_password" placeholder="Xác nhận mật khẩu mới:">
+                        <span class="error"><?php echo $errors['confirm_password'] ?? ''; ?></span><br>
 
                         <button type="submit" name="submitdoimk">XÁC NHẬN</button><br>
                     </form>

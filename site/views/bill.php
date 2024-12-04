@@ -36,7 +36,7 @@
 
             </div>
 
-            <div class="col4">
+            <div class="col3">
                 <div id="product-cart">
                     <table border=”1”>
                         <?php
@@ -53,7 +53,7 @@
                     </style>';
                         }
                         echo '
-                            <tr><td colspan="3" style="border-bottom: 0;"><h2 style="margin-left: 63px; ">ĐƠN HÀNG CỦA BẠN</h2></td></tr>
+                            <tr><td colspan="3" style="border-bottom: 0;"><h2>ĐƠN HÀNG CỦA BẠN</h2></td></tr>
                             <tr>
                             <td class="cart-col-product" style="display: none;"></td>
                             <td class="cart-name-product">Tên Sản Phẩm</td>
@@ -63,13 +63,13 @@
                             <td style="display: none;"> </td>
                         </tr>';
                         foreach ($_SESSION['myCart']['listCart'] as $cart) {
-                            $ttien = $cart[6] * $cart[4];
+                            $ttien = $cart[3] * $cart[4];
                             $tong += $ttien;
                             $delCart = '<a href="index.php?Page=delcart&idcart=' . $i . '"><input type="button" class="btn-del-cart" value="Xóa"></a>';
                             echo '<tr>
                                 <td class="cart-col-product" style="display: none;"><img src="' . $cart[2] . '" height="80px"></td>
                                 <td class="cart-name-product">' . $cart[1] . '</td>
-                                <td class="cart-col-product"><span style="text-decoration: line-through; color: rgba(206, 203, 203, 1)">' . number_format($cart[3], 0, "", ".") . 'đ</span><p>'. number_format($cart[6],0,'','.') .'</p></td>
+                                <td class="cart-col-product">' . number_format($cart[3], 0, "", ".") . 'đ</td>
                                 <td class="cart-col-product">' . $cart[4] . '</td>
                                 <td class="cart-col-product" style="display: none;">' . number_format($ttien, 0, "", ".") . 'đ<?td>
                                 <td class="cart-col-product" style="display: none;">' . $delCart . '</td>
@@ -83,7 +83,7 @@
                             <td style="border-bottom: 0;"></td>
                             <td id="tongtien" style="border-bottom: 0;">' . number_format($tong, 0, "", ".") . 'đ</td>
                         </tr><input type="text" hidden name="tong" value="' . $tong . '">
-                        <tr ><td colspan="3"><input type="submit" value="Đặt hàng" id="checkout" name="dongydathang" style="margin-left: 63px;" ></td></tr>
+                        <tr ><td colspan="3"><input type="submit" value="Đặt hàng" id="checkout" name="dongydathang" ></td></tr>
                         </form>
                         ';
                         ?>

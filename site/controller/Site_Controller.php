@@ -64,19 +64,34 @@ class Site_Controller
         $TitlePage = 'Đăng Nhập';
         include_once 'site/model/dangnhap_dangky.php';
         $Log = new Dang_Nhap_Dang_Ky();
-        $Log->DangNhap();
+
+        $loi1 = [];
+
+        if (isset($_POST['dangnhap'])) {
+            $loi1 = $Log->DangNhap();
+        }
+
         $Views = 'site/views/login_register.php';
         include_once 'site/views/layout.php';
     }
+
+
     public function dang_ky()
     {
         $TitlePage = 'Đăng Ký';
         include_once 'site/model/dangnhap_dangky.php';
         $Register = new Dang_Nhap_Dang_Ky();
-        $Register->DangKy();
+
+        $loi = $Register->Validate_DK($_POST);
+
+        if (empty($loi)) {
+            $Register->DangKy();
+        }
+
         $Views = 'site/views/login_register.php';
         include_once 'site/views/layout.php';
     }
+
 
     public function dangky_step2()
     {
@@ -92,8 +107,9 @@ class Site_Controller
     public function chinh_sua_thong_tin()
     {
         $TitlePage = 'Chỉnh Sửa Thông Tin';
-
         $Infor_User = $this->Database->Get_Infor_User($_SESSION['User_login']['ID']);
+        $errors = [];
+
         if (isset($_POST['submit'])) {
             $id = $_POST['id_user'];
             $username = $_POST['username'];
@@ -101,11 +117,15 @@ class Site_Controller
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+
             include_once 'site/model/dangnhap_dangky.php';
             $update = new Dang_Nhap_Dang_Ky();
-            if (isset($Infor_User['Password']) && password_verify($password, $Infor_User['Password'])) {
+
+            $errors = $update->cap_nhat_thong_tin($id, $name, $username, $phone, $email);
+
+            if (empty($errors) && isset($Infor_User['Password']) && password_verify($password, $Infor_User['Password'])) {
                 $result = $update->cap_nhat_thong_tin($id, $name, $username, $phone, $email);
-                if (isset($result) && $result == true) {
+                if ($result) {
                     unset($_SESSION['User_login']);
                     $User = $this->Database->Get_Infor_User($Infor_User['ID']);
                     $_SESSION['User_login'] = ['ID' => $User['ID'], 'Name' => $User['Name'], 'Email' => $User['Email'], 'Role' => $User['Role']];
@@ -117,24 +137,28 @@ class Site_Controller
                 echo "<script>alert('Mật khẩu không đúng!');</script>";
             }
         }
+
         $Views = 'site/views/thaydoithongtin.php';
         include_once 'site/views/layout.php';
     }
+
     public function doi_mat_khau()
     {
         $TitlePage = 'Đổi Mật Khẩu';
-
         $Infor_User = $this->Database->Get_Infor_User($_SESSION['User_login']['ID']);
+        $errors = [];
 
         if (isset($_POST['submitdoimk'])) {
-            $old_password = $_POST['old_password'];
-            $new_password = $_POST['new_password'];
-            $confirm_password = $_POST['confirm_password'];
-            if (password_verify($old_password, $Infor_User['Password'])) {
-                if ($new_password === $confirm_password) {
-                    include_once 'site/model/dangnhap_dangky.php';
-                    $update = new Dang_Nhap_Dang_Ky();
-                    $result = $update->cap_nhat_mat_khau($_SESSION['User_login']['ID'], password_hash($new_password, PASSWORD_DEFAULT));
+            include_once 'site/model/dangnhap_dangky.php';
+            $validate = new Dang_Nhap_Dang_Ky();
+            $errors = $validate->Validate_TDMK($_POST);
+
+            if (empty($errors)) {
+                $old_password = $_POST['old_password'];
+                $new_password = $_POST['new_password'];
+
+                if (password_verify($old_password, $Infor_User['Password'])) {
+                    $result = $validate->cap_nhat_mat_khau($_SESSION['User_login']['ID'], password_hash($new_password, PASSWORD_DEFAULT));
 
                     if ($result) {
                         echo "<script>alert('Đổi mật khẩu thành công!');</script>";
@@ -142,12 +166,11 @@ class Site_Controller
                         echo "<script>alert('Đổi mật khẩu thất bại!');</script>";
                     }
                 } else {
-                    echo "<script>alert('Mật khẩu mới không khớp!');</script>";
+                    $errors['old_password'] = "Mật khẩu cũ không đúng!";
                 }
-            } else {
-                echo "<script>alert('Mật khẩu cũ không đúng!');</script>";
             }
         }
+
         $Views = 'site/views/thaydoithongtin.php';
         include_once 'site/views/layout.php';
     }
@@ -260,6 +283,24 @@ class Site_Controller
         $donHang = $model->layDonHangTheoIDUser($_SESSION['User_login']['ID']);
         $Views = 'site/views/lich_su_hang.php';
         include_once 'site/views/layout.php';
+    }
+
+    public function huy_don_hang(){
+        if ($_GET['ID'] != null || $_GET['Status'] != null) {
+            $id = $_GET['ID'];
+            $status = $_GET['Status'];
+        } else {
+            die("Thiếu Id hoặc trạng thái");
+            exit();
+        }
+        if ($this->Database->Change_Status_Odder($id,$status)){
+            header('location: index.php?Page=xem_don_hang');
+            exit();
+        } else {
+            echo '<script> alert("Hủy Đơn Hàng Thất Bại")';
+            header('refresh:2s, url=index.php?Page=xem_don_hang');
+        }
+
     }
 
     public function xem_so_luong()

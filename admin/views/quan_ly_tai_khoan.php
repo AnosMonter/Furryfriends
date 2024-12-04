@@ -23,7 +23,7 @@
 </style>
 
 <main>
-    <h2>Bảng quản lý người dùng</h2>
+    <h1 class="Title-Page-Main">Bảng quản lý người dùng</h1>
     <table>
         <tr>
             <th>STT</th>
@@ -57,11 +57,11 @@
         <?php
         for ($i = 1; $i <= ceil(count($this->Import_Database->Get_All_User()) / $Limit); $i++) {
             if (!isset($_GET['Page_Num'])) {
-                echo '<a class="Select" href="admin.php?Page=quan_ly_san_pham&Page_Num=' . $i . '">' . $i . '</a>';
+                echo '<a class="Select" href="admin.php?Page=quan_ly_tai_khoan&Page_Num=' . $i . '">' . $i . '</a>';
             } else if ($_GET['Page_Num'] == $i) {
-                echo '<a class="Select" href="admin.php?Page=quan_ly_san_pham&Page_Num=' . $i . '">' . $i . '</a>';
+                echo '<a class="Select" href="admin.php?Page=quan_ly_tai_khoan&Page_Num=' . $i . '">' . $i . '</a>';
             } else {
-                echo '<a href="admin.php?Page=quan_ly_san_pham&Page_Num=' . $i . '">' . $i . '</a>';
+                echo '<a href="admin.php?Page=quan_ly_tai_khoan&Page_Num=' . $i . '">' . $i . '</a>';
             }
         }
         ?>

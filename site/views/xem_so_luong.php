@@ -82,7 +82,7 @@
     }
 
     .total-price {
-        text-align: right;
+        text-align: left;
         font-weight: bold;
     }
 
@@ -172,7 +172,11 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">Tổng Thanh Toán</td>
+                <td><?php if ($Get_Order['Status_Order'] <= 1) { ?>
+                        <a href="index.php?Page=huy_don_hang&ID=<?= $Get_Order['ID'] ?>&Status=4" onclick="return confirm('Bạn Có Chắc Muốn Hủy Đơn?')">Hủy Đơn</a>
+                    <?php } ?>
+                </td>
+                <td colspan="2">Tổng Thanh Toán</td>
                 <td class="total-price"><?= number_format($total_price, 0, ',', '.') ?> VND</td>
             </tr>
         </tfoot>
@@ -184,8 +188,8 @@
     <p><strong>Địa chỉ nhận hàng:</strong><?= $Get_Order['Address'] ?></p>
     <p><strong>Tên người nhận:</strong><?= $Get_Order['Name'] ?></p>
     <p><strong>Số điện thoại liên lạc:</strong><?= $Get_Order['Name'] ?></p>
-    <p><strong>Thời gian giao hàng:</strong> 12:00 07/11/2024</p>
-    <p><strong>Phương thức thanh toán:</strong><?= $Get_Order['Payment_Method']==1 && $Get_Order['Status_Order']==3? 'Tiền Mặt':'Chưa Thanh Toán' ?></p>
+    <p><strong>Thời gian thanh toán:</strong><?= $Get_Order['Payment_Date'] ?></p>
+    <p><strong>Phương thức thanh toán:</strong><?= $Get_Order['Payment_Method'] == 1 && $Get_Order['Status_Order'] == 3 ? 'Tiền Mặt' : 'Chưa Thanh Toán' ?></p>
 </div>
 
 </div>

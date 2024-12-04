@@ -13,7 +13,7 @@ class Admin_Controller
         $Total = 0;
         $Count_Order = 0;
         $Order_Suc = 0;
-        $xuly =0;
+        $xuly = 0;
         foreach ($All_Order as $Order) {
             if ($Order['Status_Order'] == 3) {
                 $Total += $Order['Total'];
@@ -29,6 +29,22 @@ class Admin_Controller
         include_once 'admin/views/nav.php';
         include_once 'admin/views/thong_ke.php';
     }
+
+    public function cap_nhat_don_hang()
+    {
+        $id = isset($_GET['ID']) && !empty($_GET['ID']) ? $_GET['ID'] : $Error = 'Không Có Giá Trị ID';
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+            $status = $_POST['Status_Order_Update'];
+            if ($this->Import_Database->Change_Status_Odder($id, $status)) {
+                header('location: admin.php?Page=quan_ly_don_hang');
+            } else {
+                echo '<script> alert("Cập nhật không thành công!") </script>';
+                header('location: admin.php?Page=quan_ly_don_hang');
+                exit();
+            }
+        }
+    }
+
     public function quan_ly_san_pham()
     {
         $TitlePage = 'Quản Lý Sản Phẩm';
@@ -86,7 +102,7 @@ class Admin_Controller
     public function quan_ly_tai_khoan()
     {
         $TitlePage = 'Quản Lý Tài Khoản';
-        $Limit = 5;
+        $Limit = 10;
         $Page_num = isset($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
@@ -104,7 +120,7 @@ class Admin_Controller
     public function quan_ly_don_hang()
     {
         $limit = 10;
-        $page = isset($_GET['Page_Num']) && !empty($_GET['Page_Num'])? $_GET['Page_Num']:1;
+        $page = isset($_GET['Page_Num']) && !empty($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
         $TitlePage = 'Quản Lý Đơn Hàng';
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
@@ -114,13 +130,18 @@ class Admin_Controller
     public function quan_ly_dich_vu()
     {
         $TitlePage = 'Quản Lý Dịch Vụ';
-        $All_Service = $this->Import_Database->Get_All_Service();
+        $limit = 10;
+        $page = isset($_GET['Page_Num']) && !empty($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
+        $All_Service = $this->Import_Database->Get_Service_By_Page($page, $limit);
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
         include_once 'admin/views/quan_ly_dich_vu.php';
     }
 
-    public function them_dich_vu(){
+
+
+    public function them_dich_vu()
+    {
         $TitlePage = 'Thêm Dịch Vụ';
         include_once 'admin/model/service_model.php';
         $Model_Service = new Services_Model();
@@ -130,8 +151,9 @@ class Admin_Controller
         include_once 'admin/views/them_dich_vu.php';
     }
 
-    public function sua_dich_vu(){
-        if (isset($_GET['ID']) &&!empty($_GET['ID'])) {
+    public function sua_dich_vu()
+    {
+        if (isset($_GET['ID']) && !empty($_GET['ID'])) {
             $TitlePage = 'Sửa Dịch Vụ';
             $service = $this->Import_Database->Get_Service_By_ID($_GET['ID']);
             $category_sv = $this->Import_Database->Get_Category_By_Like_Name('Dịch Vụ');
@@ -144,15 +166,17 @@ class Admin_Controller
         }
     }
 
-    public function xoa_dich_vu(){
-        if (isset($_GET['ID']) &&!empty($_GET['ID'])) {
+    public function xoa_dich_vu()
+    {
+        if (isset($_GET['ID']) && !empty($_GET['ID'])) {
             $this->Import_Database->Delete_Service($_GET['ID']);
             header('location: admin.php?Page=quan_ly_dich_vu');
         }
     }
 
-    public function an_hien_dich_vu(){
-        if (isset($_GET['ID']) &&!empty($_GET['ID'])) {
+    public function an_hien_dich_vu()
+    {
+        if (isset($_GET['ID']) && !empty($_GET['ID'])) {
             $this->Import_Database->Show_Hide_Service($_GET['ID']);
             header('location: admin.php?Page=quan_ly_dich_vu');
         }
@@ -162,8 +186,8 @@ class Admin_Controller
     {
         $TitlePage = 'Quản Lý Danh Mục';
         $limit = 5;
-        $page = isset($_GET['Page_Num']) && !empty($_GET['Page_Num'])? $_GET['Page_Num']:1;
-        $list_categories = $this->Import_Database->Get_All_Category_By_Page($limit,$page);
+        $page = isset($_GET['Page_Num']) && !empty($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
+        $list_categories = $this->Import_Database->Get_All_Category_By_Page($limit, $page);
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
         include_once 'admin/views/quan_ly_danh_muc.php';
@@ -249,7 +273,7 @@ class Admin_Controller
         $TitlePage = 'Quản Lý Tin Tức';
         $Limit = 5;
         $Page_num = isset($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
-        $offset = ($Page_num-1) * $Limit;
+        $offset = ($Page_num - 1) * $Limit;
         $All_News = $this->Import_Database->Get_News_By_Page($Limit, $offset);
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
@@ -319,6 +343,4 @@ class Admin_Controller
             echo "Xóa bình luận thất bại";
         }
     }
-
-    
 }

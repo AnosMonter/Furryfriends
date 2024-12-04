@@ -1,4 +1,6 @@
 <main>
+<h1 class="Title-Page-Main">Quản Lý Đơn Hàng</h1>
+
     <table border="1" class="Table-Order-Manager">
         <tr>
             <th>ID Hóa Đơn</th>
@@ -9,19 +11,21 @@
             <th>Trạng Thái</th>
         </tr>
         <?php $stt = 1;
-        foreach ($this->Import_Database->Get_Order_By_Page($page,$limit) as $key => $value) { ?>
+        foreach ($this->Import_Database->Get_Order_By_Page($page, $limit) as $key => $value) { ?>
             <tr>
                 <td><?= $stt++ ?></td>
                 <td><?= $this->Import_Database->Get_User_By_ID($value['ID_User'])['Name'] ?> </td>
                 <td><?= $value['Total'] ?></td>
                 <td><?= $value['Create_Date'] ?></td>
-                <td><?= $value['Payment_Date'] ?></td>
+                <td><?= $value['Payment_Date']?></td>
                 <td>
                     <form class="form-update-status-order" action="admin.php?Page=cap_nhat_don_hang&ID=<?= $value['ID'] ?>" method="post">
                         <select name="Status_Order_Update" id="">
-                            <option value="0" <?= $value['Status_Order'] == 0 ? 'selected' : '' ?>>Đang Xử Lý</option>
-                            <option value="1" <?= $value['Status_Order'] == 1 ? 'selected' : '' ?>>Đang Chuẩn Bị</option>
-                            <option value="2" <?= $value['Status_Order'] == 2 ? 'selected' : '' ?>>Đang Giao Hàng</option>
+                            <?php if (empty($value['Payment_Date'])) { ?>
+                                <option value="0" <?= $value['Status_Order'] == 0 ? 'selected' : '' ?>>Đang Xử Lý</option>
+                                <option value="1" <?= $value['Status_Order'] == 1 ? 'selected' : '' ?>>Đang Chuẩn Bị</option>
+                                <option value="2" <?= $value['Status_Order'] == 2 ? 'selected' : '' ?>>Đang Giao Hàng</option>
+                            <?php } ?>
                             <option value="3" <?= $value['Status_Order'] == 3 ? 'selected' : '' ?>>Giao Hàng Hoàn Tất</option>
                             <option value="4" <?= $value['Status_Order'] == 4 ? 'selected' : '' ?>>Hủy Đơn Hàng</option>
                         </select>

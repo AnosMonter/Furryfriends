@@ -77,6 +77,26 @@
         text-decoration: none;
         color: #333;
     }
+
+    .btn-chi-tiet-hoa-don-us {
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        padding: 10px 20px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .btn-chi-tiet-hoa-don-us:hover {
+        background-color: #0056b3;
+    }
 </style>
 <main>
 <div class="Container">
@@ -102,7 +122,7 @@
                     <td><?= htmlspecialchars($don['Address']); ?></td>
                     <td><?= number_format($don['Total'], 2); ?> đ</td>
                     <td><?= $don['Payment_Date'] ?? 'Chưa thanh toán'; ?></td>
-                    <td><a href="index.php?Page=xem_so_luong&ID=<?= $don['ID']?>">
+                    <td><a class="btn-chi-tiet-hoa-don-us" <?= $don['Status_Order'] == 4? 'style="background-color: red;"':'' ?> href="index.php?Page=xem_so_luong&ID=<?= $don['ID']?>">
                         <?php 
                         if ($don['Status_Order'] == 0){
                             echo 'Đang Xử Lý';

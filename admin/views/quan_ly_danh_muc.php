@@ -1,7 +1,7 @@
 
 <main>
     <?= isset($_GET['Noti']) ? '<script>alert("' . $_GET['Noti'] . '")</script>' : '' ?>
-    <h1>Quản lý Danh mục</h1>
+    <h1 class="Title-Page-Main">Quản lý Danh mục</h1>
     <a class="btn-add" href="admin.php?Page=them_danh_muc">Thêm Danh Mục</a>
     <table class="category-table">
         <thead>
@@ -32,7 +32,7 @@
     </table>
     <div class="pagination">
             <?php
-            for ($i = 1; $i <= ceil(count($this->Import_Database->Get_All_Category()) / $limit); $i++) {
+            for ($i = 1; $i <= count($this->Import_Database->Get_All_Category())/ $limit; $i++) {
                 if (!isset($_GET['Page_Num'])) {
                     echo '<a class="Select" href="admin.php?Page=quan_ly_danh_muc&Page_Num=' . $i . '">' . $i . '</a>';
                 } else if ($_GET['Page_Num'] == $i) {

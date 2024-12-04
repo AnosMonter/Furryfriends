@@ -19,13 +19,28 @@ class Database
         return $this->pdo == true ? 'Success' : 'Error';
     }
     /* ====================== Hóa Đơn ============================ */
-    public function Select_All_Order(){
+    public function Select_All_Order()
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM orders");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function Get_Order_By_Page($page, $limit){
+    public function Change_Status_Odder($id, $status)
+    {
+        if ($status == 3) {
+            $sql = "UPDATE orders SET Status_Order = :status, Payment_Date = NOW() WHERE ID = :id";
+        } else {
+            $sql = "UPDATE orders SET Status_Order = :status WHERE ID = :id";
+        }
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function Get_Order_By_Page($page, $limit)
+    {
         $offset = ($page - 1) * $limit;
         $stmt = $this->pdo->prepare("SELECT * FROM orders LIMIT :offset, :limit");
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -34,7 +49,8 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function Get_Total_Order_By_Date($date){
+    public function Get_Total_Order_By_Date($date)
+    {
         $stmt = $this->pdo->prepare("SELECT SUM(Total) AS 'Doanh Thu' FROM orders WHERE Date(Payment_Date) = :date");
         $stmt->bindParam(':date', $date);
         $stmt->execute();
@@ -49,7 +65,8 @@ class Database
         return $stmt->fetch(PDO::FETCH_ASSOC)['Status_Order'];
     }
 
-    public function Get_Order_Detail_By_ID($id){
+    public function Get_Order_Detail_By_ID($id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM orders WHERE ID = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -96,11 +113,12 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function Get_User_By_ID($user_id){
+    public function Get_User_By_ID($user_id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE ID = :id");
         $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);    
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function Get_User_By_Page($limit, $Page)
@@ -131,6 +149,33 @@ class Database
         WHERE c.Name LIKE :name limit :number;");
         $Name = '%' . $name . '%';
         $stmt->bindParam(':name', $Name, PDO::PARAM_STR);
+        $stmt->bindParam(':number', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Get_Product_Limit_New($limit = 5)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM products ORDER BY ID DESC LIMIT :number");
+        $stmt->bindParam(':number', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Get_Comment_Product_Limit_New($limit = 5)
+    {
+        $stmt = $this->pdo->prepare("SELECT 
+            r.ID, 
+            u.Name,
+            r.Date,
+            r.ID_Product,
+            r.Status, 
+            r.Rating, 
+            r.Review
+        FROM 
+            rating_product r
+        INNER JOIN users u ON r.ID_User = u.ID
+        ORDER BY r.Date DESC LIMIT :number");
         $stmt->bindParam(':number', $limit, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -247,7 +292,8 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function Get_Category_By_Page($page, $limit){
+    public function Get_Category_By_Page($page, $limit)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM categories LIMIT :limit OFFSET :offset");
         $offset = $limit * ($page - 1);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -371,7 +417,7 @@ class Database
     }
 
 
-    /* ====================== Tin Tức ============================ */
+    /* ====================== Bài Viết ============================ */
 
     public function Get_All_News()
     {
@@ -379,7 +425,13 @@ class Database
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public function Get_News_Limit_New($limit)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM news ORDER BY Create_Date DESC LIMIT :limit");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function Get_News_By_Page($limit, $offset)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM news ORDER BY Create_Date DESC LIMIT :limit OFFSET :offset");
@@ -397,7 +449,7 @@ class Database
             $stmt = $this->pdo->prepare($query);
 
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-            $stmt->bindParam(':content', $content , PDO::PARAM_STR);
+            $stmt->bindParam(':content', $content, PDO::PARAM_STR);
             $stmt->bindParam(':image', $image_path, PDO::PARAM_STR);
             $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
             $stmt->bindParam(':status', $status, PDO::PARAM_INT);
@@ -565,7 +617,7 @@ class Database
         $result->execute(['id' => $id]);
         return $result->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     function sp_moi($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1 ORDER BY ID DESC LIMIT :sl";
@@ -607,36 +659,38 @@ class Database
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function sp_dm($id, $page_size = 6, $page_num = 1) {
+    function sp_dm($id, $page_size = 6, $page_num = 1)
+    {
         $start = ($page_num - 1) * $page_size;
         $sql = "SELECT * FROM products 
                 WHERE Status = 1 AND Category_ID = :id 
                 ORDER BY ID DESC 
                 LIMIT :start, :page_size";
-    
+
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':start', $start, PDO::PARAM_INT);
         $result->bindParam(':page_size', $page_size, PDO::PARAM_INT);
-    
+
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function dm_dem($id_dm) {
+    function dm_dem($id_dm)
+    {
         $sql = "SELECT COUNT(*) AS dem 
                 FROM products 
                 WHERE Status = 1 AND Category_ID = :id_dm";
-    
+
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':id_dm', $id_dm, PDO::PARAM_INT);
-    
+
         $result->execute();
         $data = $result->fetch(PDO::FETCH_ASSOC);
-    
+
         return $data['dem'];
     }
-    
+
     function Chi_Tiet($id)
     {
         $sql = "SELECT products.*, categories.Name as ten_loai FROM products, categories WHERE products.id = :id_sp AND products.Category_ID = categories.ID";
@@ -651,7 +705,7 @@ class Database
         $start = ($page_num - 1) * $page_size;
         $sql = "SELECT * FROM Products WHERE Name LIKE :keyword AND Price BETWEEN :min_p AND :max_p AND Status = 1 ORDER BY Price $order LIMIT :start, :page_size";
         $stmt = $this->pdo->prepare($sql);
-        $keyw = '%'.$keyword.'%';
+        $keyw = '%' . $keyword . '%';
         $stmt->bindParam(':keyword', $keyw, PDO::PARAM_STR);
         $stmt->bindParam(':min_p', $min_price, PDO::PARAM_INT);
         $stmt->bindParam(':max_p', $max_price, PDO::PARAM_INT);
@@ -690,8 +744,8 @@ class Database
     {
         $sql = "SELECT * FROM products WHERE Name LIKE :k1 AND Name LIKE :k2 AND Status = 1";
         $result = $this->pdo->prepare($sql);
-        $result->bindParam(':k1', '%'.$k1.'%', PDO::PARAM_STR);
-        $result->bindParam(':k2', '%'.$k2.'%', PDO::PARAM_STR);
+        $result->bindParam(':k1', '%' . $k1 . '%', PDO::PARAM_STR);
+        $result->bindParam(':k2', '%' . $k2 . '%', PDO::PARAM_STR);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -725,7 +779,7 @@ class Database
                 ORDER BY
                     r.Date DESC";
         $result = $this->pdo->prepare($sql);
-        $result->bindParam(':id_prd',$ProductId, PDO::PARAM_INT);
+        $result->bindParam(':id_prd', $ProductId, PDO::PARAM_INT);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -800,7 +854,8 @@ class Database
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function Get_Service_By_ID_Category($id){
+    public function Get_Service_By_ID_Category($id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM services WHERE Category_ID = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -836,15 +891,17 @@ class Database
         return $stmt->execute();
     }
 
-    public function Delete_Service($id){
+    public function Delete_Service($id)
+    {
         $stmt = $this->pdo->prepare("DELETE FROM services WHERE ID = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
-    public function Show_Hide_Service($id){
+    public function Show_Hide_Service($id)
+    {
         $stmt = $this->pdo->prepare("UPDATE services SET Status = :status WHERE ID = :id");
-        $status = ($this->Get_Service_By_ID($id)['Status'] == 1)? 0 : 1;
+        $status = ($this->Get_Service_By_ID($id)['Status'] == 1) ? 0 : 1;
         $stmt->bindParam(':status', $status, PDO::PARAM_INT);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();

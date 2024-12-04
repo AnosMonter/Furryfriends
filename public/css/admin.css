@@ -80,15 +80,22 @@ main {
     padding: 10px;
 }
 
+.Title-Page-Main {
+    width: calc(100% - 20px);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(240, 240, 240, 0.7);
+    margin: 20px;
+    text-align: center;
+}
+
 /* =========================== Category ============================= */
 
-/* Table Styles */
 .category-table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #ddd;
-    /* Add border to the table */
 }
 
 .category-table th,
@@ -107,13 +114,12 @@ main {
     background-color: #f2f2f2;
 }
 
-/* Image Styles */
 .category-image {
     max-width: 100%;
     height: auto;
 }
 
-/* Button Styles */
+
 .btn-add,
 .btn-edit,
 .btn-delete {
@@ -138,52 +144,54 @@ main {
 
 .btn-delete {
     background-color: #dc3545;
-    /* Danger color for delete button */
 }
 
 /* ====================== Thống Kê =========================*/
 .Thong-ke-tren-tong-don-hang {
+    margin: 0 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    gap: 10px;
+    gap: 20px;
 }
 
-.Thong-ke-tren-tong-don-hang div {
-    text-align: center;
-    width: calc((100% - 20px) / 3);
-    aspect-ratio: 2/1;
-    background-color: rgb(240, 240, 240);
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: bold;
-    align-items: center;
-}
-
-.Thong-ke-tren-tong-don-hang h2 {
+.Thong-ke-tren-tong-don-hang div h2 {
     width: 100%;
-    margin: 0;
-    font-size: 30px;
-}
-
-.Thong-ke-tren-tong-don-hang p {
-    margin: 5px 0;
-    width: 50%;
     font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
 }
 
-.Thong-ke-tren-tong-don-hang i {
-    font-size: 36px;
-    width: 50%;
+.Thong-ke-tren-tong-don-hang>div {
+    width: calc((100% - 40px)/3);
+    text-align: center;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.box-item-thong-ke {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-item-thong-ke p {
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
+    margin-bottom: 10px;
+}
+
+.box-item-thong-ke i {
+    font-size: 36px;
+    color: #666;
 }
 
 /* =========================== Sản Phẩm ============================= */
 .manager-product-container {
-    font-family: Arial, sans-serif;
+    width: 100%;
     margin: 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -214,7 +222,7 @@ main {
 .manager-product-container table th,
 .manager-product-container table td {
     padding: 10px;
-    text-align: center;
+    text-align: left;
     border: 1px solid #ddd;
 }
 
@@ -228,6 +236,7 @@ main {
     height: 100px;
     object-fit: cover;
 }
+
 .manager-product-container table td a {
     margin: 0 5px;
     color: white;
@@ -286,7 +295,7 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.form-edit-category  {
+.form-edit-category {
     display: block;
     margin-bottom: 10px;
 }
@@ -323,35 +332,38 @@ main {
 .Table-Order-Manager {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  .Table-Order-Manager th, .Table-Order-Manager td {
+}
+
+.Table-Order-Manager th,
+.Table-Order-Manager td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-  }
-  
-  .Table-Order-Manager th {
+}
+
+.Table-Order-Manager th {
     background-color: #f2f2f2;
-  }
-  
-  .Table-Order-Manager tr:nth-child(even) {
+}
+
+.Table-Order-Manager tr:nth-child(even) {
     background-color: #f2f2f2;
-  }
-  
-  .Table-Order-Manager .form-update-status-order {
+}
+
+.Table-Order-Manager .form-update-status-order {
     display: inline-block;
-  }
-  
-  .Table-Order-Manager .form-update-status-order select {
+}
+
+.Table-Order-Manager select,
+.Table-Order-Manager input[type="date"] {
+    width: max-content;
     padding: 5px;
     border: 1px solid #ccc;
-  }
-  
-  .Table-Order-Manager .form-update-status-order button {
+}
+
+.Table-Order-Manager button {
     padding: 5px 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
-  }
+}

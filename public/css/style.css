@@ -574,6 +574,7 @@ footer {
     text-align: center;
     width: 400px;
 }
+
 /* ================================== số trang ====================================== */
 #so_trang {
     margin: 20px;
@@ -597,7 +598,8 @@ footer {
 
 #so_trang a:hover {
     background-color: #2687F9;
-    transform: scale(1.1); /* Tăng kích thước khi hover */
+    transform: scale(1.1);
+    /* Tăng kích thước khi hover */
 }
 
 #so_trang a.active {
@@ -643,7 +645,8 @@ footer {
     height: 25px;
     margin-bottom: 30px;
 }
-.item-name{
+
+.item-name {
     font-size: 16px;
     font-weight: bold;
     line-height: 1.4;
@@ -652,6 +655,7 @@ footer {
     white-space: normal;
     text-overflow: ellipsis;
 }
+
 .item-price {
     text-align: center;
     margin-bottom: 10px;
@@ -684,18 +688,23 @@ footer {
 }
 
 .btn-add-cart i {
-    margin-left: 10px; /* Khoảng cách giữa chữ và icon */
+    margin-left: 10px;
+    /* Khoảng cách giữa chữ và icon */
 }
 
 .btn-add-cart:hover {
-    background-color: #F7941D; /* Màu khi hover */
+    background-color: #F7941D;
+    /* Màu khi hover */
     color: #fff;
-    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+    transform: scale(1.05);
+    /* Hiệu ứng phóng to khi hover */
 }
 
 .btn-add-cart:active {
-    background-color: #145394; /* Màu khi nhấn */
-    transform: scale(0.95); /* Hiệu ứng thu nhỏ khi nhấn */
+    background-color: #145394;
+    /* Màu khi nhấn */
+    transform: scale(0.95);
+    /* Hiệu ứng thu nhỏ khi nhấn */
 }
 
 
@@ -729,17 +738,24 @@ footer {
         font-size: 1em;
     }
 }
+
 /* ================================== tìm kiếm ===================================== */
-.kq-timkiem .no-results{
+.kq-timkiem .no-results {
     text-align: center;
 }
+
 .no-results {
-    font-size: 20px; /* Điều chỉnh kích thước chữ hợp lý */
-    color: #333; /* Màu chữ đậm hơn, dễ đọc */
-    text-align: center; /* Căn giữa văn bản */
-    margin: 20px auto; /* Căn giữa và tạo khoảng cách */
+    font-size: 20px;
+    /* Điều chỉnh kích thước chữ hợp lý */
+    color: #333;
+    /* Màu chữ đậm hơn, dễ đọc */
+    text-align: center;
+    /* Căn giữa văn bản */
+    margin: 20px auto;
+    /* Căn giữa và tạo khoảng cách */
     font-weight: 700;
 }
+
 .kq-timkiem h2 {
     background-color: #F7941D;
     color: white;
@@ -760,7 +776,8 @@ footer {
     text-align: center;
 }
 
-.filter-bar, .price-filter {
+.filter-bar,
+.price-filter {
     padding-left: 50px;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -777,7 +794,7 @@ footer {
     font-weight: bold;
 }
 
-.filter-bar input[type="number"], 
+.filter-bar input[type="number"],
 .filter-bar select {
     padding: 8px;
     border: 1px solid #ccc;
@@ -825,7 +842,7 @@ footer {
 }
 
 #chi-tiet #row1 img:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -835,7 +852,7 @@ footer {
     color: #333;
 }
 
-#chi-tiet hr{
+#chi-tiet hr {
     margin: 20px 0;
     border: 0;
     border-top: 1px solid #ddd;
@@ -857,7 +874,8 @@ footer {
 #chi-tiet #row1 .tt1 {
     margin-left: 15px;
     padding-left: 15px;
-    border-left: 3px solid #F7941D; /* Viền trái nổi bật */
+    border-left: 3px solid #F7941D;
+    /* Viền trái nổi bật */
     list-style: none;
 }
 
@@ -868,7 +886,8 @@ footer {
 
 .price-current {
     font-weight: bold;
-    color: #FF4545; /* Màu đỏ tươi */
+    color: #FF4545;
+    /* Màu đỏ tươi */
     font-size: 1.2em;
 }
 
@@ -937,19 +956,26 @@ footer {
 #btn-decrease,
 #btn-increase,
 #quantity {
-    border: 1px solid #ccc; /* Viền cho các ô */
-    padding: 5px 12px; /* Khoảng cách bên trong */
+    border: 1px solid #ccc;
+    /* Viền cho các ô */
+    padding: 5px 12px;
+    /* Khoảng cách bên trong */
     font-size: 16px;
     text-align: center;
-    background-color: transparent; /* Không có nền */
-    border-radius: 5px; /* Bo góc nhẹ */
+    background-color: transparent;
+    /* Không có nền */
+    border-radius: 5px;
+    /* Bo góc nhẹ */
 }
 
 #quantity {
-    width: 60px; /* Đặt chiều rộng của ô số lượng */
+    width: 60px;
+    /* Đặt chiều rộng của ô số lượng */
     font-size: 16px;
-    border-left: none; /* Xóa viền trái */
-    border-right: none; /* Xóa viền phải */
+    border-left: none;
+    /* Xóa viền trái */
+    border-right: none;
+    /* Xóa viền phải */
     text-align: center;
     color: #333;
 }
@@ -966,21 +992,25 @@ footer {
 
 #btn-decrease:hover,
 #btn-increase:hover {
-    background-color: #f0f0f0; /* Màu nền khi hover */
+    background-color: #f0f0f0;
+    /* Màu nền khi hover */
     transform: scale(1.1);
 }
 
 .btn-add-cart-detail {
     padding: 10px 20px;
-    background-color: #2687F9; /* Màu nền của nút */
+    background-color: #2687F9;
+    /* Màu nền của nút */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
-    margin-left: 30px; /* Khoảng cách giữa nút và ô tăng giảm */
+    gap: 8px;
+    /* Khoảng cách giữa biểu tượng và văn bản */
+    margin-left: 30px;
+    /* Khoảng cách giữa nút và ô tăng giảm */
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -991,7 +1021,8 @@ footer {
 }
 
 .btn-add-cart-detail i {
-    font-size: 18px; /* Tăng kích thước biểu tượng giỏ hàng */
+    font-size: 18px;
+    /* Tăng kích thước biểu tượng giỏ hàng */
 }
 
 /* responsive */
@@ -1188,7 +1219,7 @@ footer {
 /* ============================ Đăng Nhập Đăng Ký ============================ */
 
 .box-login {
-    width: 850px;
+    width: 80%;
     min-height: 700px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -1224,8 +1255,8 @@ footer {
 .form-login input[type="text"],
 .form-register input[type=text] {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0 15px;
+    padding: 20px;
+    margin: 5px 0 ;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -1326,6 +1357,8 @@ footer {
 
 .form-login,
 .form-register {
+    width: 100%;
+    padding: 20px;
     position: absolute;
     top: 0;
     transition: all 0.5s ease-in-out;
@@ -1362,10 +1395,10 @@ footer {
 
 .form-register input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
+    padding: 18px 20px;
     margin: 5px 0 20px;
     border: 1px solid #aaa;
-    font-size: 14px;
+    font-size: 15px;
     background-color: #fff;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -1920,7 +1953,7 @@ footer {
     aspect-ratio: 2/1;
 }
 
-/* ======================== Giỏ hàng ===================== */
+/* ======================== bill ===================== */
 .Box-Cart {
     width: 100%;
     display: flex;
@@ -1958,13 +1991,14 @@ footer {
     border-right: 1px solid #CDC5C5;
 }
 
-.col4 {
+.col3 {
+    margin-top: -200px;
     float: right;
     width: 40%;
-
+    margin-left: 60px;
 }
 
-.col4 tr td {
+.col3 tr td {
     text-align: center;
     border: 0;
     border-bottom: 1px solid #CDC5C5;
@@ -1972,7 +2006,7 @@ footer {
     padding: 20px;
 }
 
-.col4 table {
+.col3 table {
     width: 80%;
     margin: 0 auto;
     border-collapse: collapse;
@@ -1999,24 +2033,6 @@ footer {
 .cart-col-product {
     width: 100px;
 
-}
-
-#checkout {
-    background-color: #ff0000;
-    padding: 15px 100px;
-    color: white;
-    font-size: 25px;
-    outline: none;
-    cursor: pointer;
-    border: 0;
-}
-
-.btn-del-cart {
-    outline: none;
-    color: #ff0000;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
 }
 
 /* ============================== Cart =========================== */
@@ -2125,6 +2141,7 @@ footer {
     float: right;
     width: 40%;
     margin-top: 20px;
+    text-align: center;
 
 }
 
@@ -2141,6 +2158,7 @@ footer {
     margin: 0 auto;
     border-collapse: collapse;
     border: none;
+    text-align: center;
 }
 
 #product-cart {
@@ -2162,9 +2180,8 @@ footer {
 }
 
 #checkout {
-    margin-left: 43px;
-    background-color: #ff0000;
-    padding: 10px 80px;
+    background-color: #066EFF;
+    padding: 10px 90px;
     color: white;
     font-size: 25px;
     outline: none;
@@ -2179,6 +2196,116 @@ footer {
     border: 0;
     cursor: pointer;
 
+}
+
+.Box-bill-confirm .cart-process {
+    width: 100%;
+    padding: 10px 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Box-bill-confirm .cart-process-child {
+    border-radius: 100%;
+    width: 200px;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.Box-bill-confirm .cart-process-child i {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    background-color: #707070;
+    font-size: 38px;
+    line-height: 80px;
+}
+
+.Box-bill-confirm .cart-process-child p {
+    width: 100px;
+    margin: 0 auto;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.Box-bill-confirm .col6 table {
+    border-collapse: collapse;
+    border: none;
+    padding: 20px 20px 15px 20px;
+}
+
+.Box-bill-confirm .col6 table .left {
+    width: 180px;
+    padding: 10px 20px;
+    font-weight: bold;
+
+}
+
+.Box-bill-confirm .col6 #thong_tin_nguoi_nhan {
+    width: 90%;
+    min-height: 400px;
+    border-top: 2px #066EFF solid;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px 20px 15px 20px;
+}
+
+.Box-bill-confirm .col6 #thanh_toan input,
+.Box-bill-confirm .col6 #thanh_toan select {
+    width: 100%;
+    line-height: 30px;
+    height: 30px;
+    outline: none;
+    border: 0;
+    border-bottom: #CDC5C5 1px solid;
+    margin-bottom: 10px;
+}
+
+
+
+.Box-bill-confirm .col6 {
+    margin-top: 20px;
+    float: left;
+    width: 55%;
+    border-right: 1px solid #CDC5C5;
+}
+
+
+.Box-bill-confirm .col4 {
+    float: right;
+    width: 40%;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px 20px 15px 20px;
+    border-radius: 10px;
+
+}
+
+.Box-bill-confirm .col4 tr td {
+
+    border: 0;
+    ;
+    border-bottom: 1px solid #CDC5C5;
+    padding: 20px;
+}
+
+.Box-bill-confirm .col4 #chi_tiet_don_hang table {
+    border: collapse;
+    border: none;
+
+}
+
+.Box-bill-confirm {
+    height: 900px;
+}
+
+
+
+.Box-bill-confirm table tr,
+.Box-bill-confirm table td {
+    border: 0;
 }
 
 /* ============================== Viết Đánh Giá =========================== */

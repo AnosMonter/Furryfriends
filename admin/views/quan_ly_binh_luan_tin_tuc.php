@@ -23,7 +23,7 @@ table {
 th, td {
     padding: 10px 15px;
     border: 1px solid #ddd;
-    text-align: center;
+    text-align: left;
 }
 
 th {
@@ -76,7 +76,7 @@ td img {
 }
 </style>
 <main>
-    <h1>Quản Lý Bình Luận</h1>
+    <h1 class="Title-Page-Main">Quản Lý Bình Luận</h1>
     <a class="binh_luan" href="admin.php?Page=quan_ly_bai_viet" class="btn-back">Quay Lại Quản Lý Tin Tức</a>
     <table border="1" cellspacing="0" cellpadding="10" >
         <thead style="background-color: #f2f2f2;">
