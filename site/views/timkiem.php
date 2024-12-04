@@ -21,7 +21,7 @@
                     <a href="index.php?Page=chi_tiet&id=<?php echo $product['ID']; ?>">
                         <img src="<?php echo $product['Image']; ?>" alt="<?php echo $product['Name']; ?>">
                     </a>
-                    <h3><a href="index.php?Page=chi_tiet&id=<?php echo $product['ID']; ?>"><?php echo $product['Name']; ?></a></h3>
+                    <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $product['ID']; ?>"><?php echo $product['Name']; ?></a></h3></div>
                     <div class="item-price">
                             <span><?php echo number_format($product['Discount'], 0, ',', '.'); ?> Đ</span>
                             <del><?php echo number_format($product['Price'], 0, ',', '.'); ?> Đ</del>
