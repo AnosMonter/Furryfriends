@@ -16,6 +16,7 @@
                             <span class="out-stock">Hết hàng</span>
                         <?php endif; ?>
                     </li>
+                    <li>Lượt xem: <?php echo $row['Views']; ?></li>
                 </ul>
                 <p>
                     <span style="font-weight: 800; font-size: 22px;">Giá bán: </span>
@@ -25,7 +26,6 @@
                     <?php endif; ?>
                 </p>
                 <p><span style="font-weight: 800; font-size: 22px;">Mô tả: </span><?php echo nl2br($row['Description']); ?></p>
-                <hr>
                 <div id="quantity-container">
                     <button id="btn-decrease" class="btn" onclick="updateQuan(-1)">-</button>
                     <input type="text" id="quantity" value="1" readonly>
