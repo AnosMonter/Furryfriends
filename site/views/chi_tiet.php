@@ -52,7 +52,7 @@
         </div>
         <div id="binh-luan">
             <h2 class="title_product">Đánh giá</h2>
-            <div class="comm-container">
+            <div class="comm-container <?= empty($binhluan_arr) ? 'no-comments' : ''; ?>">
                 <?php if (!empty($binhluan_arr)): ?>
                     <?php foreach ($binhluan_arr as $binhluan): ?>
                         <div class="comment">
@@ -63,7 +63,7 @@
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>Chưa có bình luận nào cho sản phẩm này.</p>
+                    <p class="notCmt">Chưa có bình luận nào cho sản phẩm này.</p>
                 <?php endif; ?>
             </div>
         </div>
