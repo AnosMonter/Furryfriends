@@ -1,7 +1,4 @@
 <style>
- main {
-    font-family: Arial, sans-serif;
-}
 
 .binh_luan {
     display: inline-block;

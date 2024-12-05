@@ -1,5 +1,6 @@
 <style>
     form {
+    width: 100%;
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 10px;

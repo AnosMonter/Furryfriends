@@ -1,20 +1,17 @@
 <style>
     .form-them-dich-vu {
-        /* General styling */
+        width: 100%;
         margin: 20px;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f8f8f8;
 
-        /* Label styling */
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-
-        /* Input and textarea styling */
         input[type="text"],
         input[type="number"],
         textarea {
@@ -24,8 +21,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
         }
-
-        /* Select styling */
         select {
             width: 100%;
             padding: 10px;
@@ -33,8 +28,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
         }
-
-        /* Button styling */
         button[type="submit"] {
             background-color: #007bff;
             color: #fff;

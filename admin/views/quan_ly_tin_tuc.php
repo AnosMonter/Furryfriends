@@ -107,7 +107,7 @@
                 $List_News .= '
                 <td>
                     <a href="admin.php?Page=sua_bai_viet&ID=' . $News['ID'] . '"><i class="fa-solid fa-pen-to-square"></i></a> |
-                    <a href="admin.php?Page=xoa_bai_viet&ID=' . $News['ID'] . '"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="admin.php?Page=xoa_bai_viet&ID=' . $News['ID'] . '" onclick="return confirm(\'Bạn có chắc chắn muốn xóa bài viết này?\');"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>';
             }

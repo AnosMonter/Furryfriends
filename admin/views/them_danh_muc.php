@@ -1,6 +1,6 @@
 <style>
     form {
-        width: 400px;
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;

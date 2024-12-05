@@ -33,7 +33,7 @@
                 $List_Product .= '
                 <td>
                     <a href="admin.php?Page=sua_san_pham&ID=' . $Product['ID'] . '"><i class="fa-solid fa-pen-to-square"></i></a> |
-                    <a style="background-color:red;" href="admin.php?Page=xoa_san_pham&ID=' . $Product['ID'] . '"><i class="fa-solid fa-trash-can"></i></a>
+                    <a style="background-color:red;" href="admin.php?Page=xoa_san_pham&ID=' . $Product['ID'] . '" onclick="return confirm(\'Bạn có chắc chắn muốn xóa sản phẩm này?\');"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>';
             }
