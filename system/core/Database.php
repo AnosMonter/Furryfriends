@@ -601,15 +601,28 @@ class Database
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    // Xóa bình luận
     public function Delete_Comment($comment_id)
     {
         $stmt = $this->pdo->prepare("DELETE FROM comments_news WHERE ID = :comment_id");
         $stmt->bindParam(':comment_id', $comment_id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    /* ====================== Trang Chủ ============================ */
+    /* ========================= Trang Chủ ============================ */
 
+    public function Get_All_Banner(){
+        $sql = "SELECT * FROM banners";
+        $result = $this->pdo->prepare($sql);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Get_All_Banner_By_Status($status){
+        $sql = "SELECT * FROM banners WHERE Status = :status";
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getBannerById($id)
     {
         $sql = "SELECT * FROM banners WHERE ID = :id";
@@ -618,7 +631,7 @@ class Database
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
-    function sp_moi($so_luong)
+    public function sp_moi($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1 ORDER BY ID DESC LIMIT :sl";
         $result = $this->pdo->prepare($sql);
@@ -626,7 +639,7 @@ class Database
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    function sp_km($so_luong)
+    public function sp_km($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Discount > 0 && Discount < Price ORDER BY ID DESC LIMIT :sl";
         $result = $this->pdo->prepare($sql);
@@ -634,7 +647,7 @@ class Database
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    function sp_cho($so_luong)
+    public function sp_cho($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1 AND Name LIKE '%chó%' LIMIT :sl";
         $result = $this->pdo->prepare($sql);
@@ -642,7 +655,7 @@ class Database
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    function sp_meo($so_luong)
+    public function sp_meo($so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1 AND Name LIKE '%mèo%' LIMIT :sl";
         $result = $this->pdo->prepare($sql);
@@ -650,7 +663,7 @@ class Database
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    function danh_muc($so_luong)
+    public function danh_muc($so_luong)
     {
         $sql = "SELECT * FROM categories WHERE Status = 1 ORDER BY ID ASC LIMIT :sl";
         $result = $this->pdo->prepare($sql);
@@ -659,39 +672,34 @@ class Database
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function sp_dm($id, $page_size = 6, $page_num = 1)
+    public function sp_dm($id, $page_size = 6, $page_num = 1)
     {
         $start = ($page_num - 1) * $page_size;
         $sql = "SELECT * FROM products 
                 WHERE Status = 1 AND Category_ID = :id 
                 ORDER BY ID DESC 
                 LIMIT :start, :page_size";
-
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':start', $start, PDO::PARAM_INT);
         $result->bindParam(':page_size', $page_size, PDO::PARAM_INT);
-
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function dm_dem($id_dm)
+    public function dm_dem($id_dm)
     {
         $sql = "SELECT COUNT(*) AS dem 
                 FROM products 
                 WHERE Status = 1 AND Category_ID = :id_dm";
-
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':id_dm', $id_dm, PDO::PARAM_INT);
-
         $result->execute();
         $data = $result->fetch(PDO::FETCH_ASSOC);
-
         return $data['dem'];
     }
 
-    function Chi_Tiet($id)
+    public function Chi_Tiet($id)
     {
         $sql = "SELECT products.*, categories.Name as ten_loai FROM products, categories WHERE products.id = :id_sp AND products.Category_ID = categories.ID";
         $stmt = $this->pdo->prepare($sql);
@@ -700,7 +708,7 @@ class Database
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    function tim_kiem_sp($keyword, $min_price = 0, $max_price = PHP_INT_MAX, $page_size = 6, $page_num = 1, $order = 'ASC')
+    public function tim_kiem_sp($keyword, $min_price = 0, $max_price = PHP_INT_MAX, $page_size = 6, $page_num = 1, $order = 'ASC')
     {
         $start = ($page_num - 1) * $page_size;
         $sql = "SELECT * FROM Products WHERE Name LIKE :keyword AND Price BETWEEN :min_p AND :max_p AND Status = 1 ORDER BY Price $order LIMIT :start, :page_size";
@@ -715,26 +723,19 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function tim_kiem_dem($keyword, $min_price = 0, $max_price = PHP_INT_MAX)
+    public function tim_kiem_dem($keyword, $min_price = 0, $max_price = PHP_INT_MAX)
     {
-        // Truy vấn đếm số lượng sản phẩm thỏa mãn điều kiện
         $sql = "SELECT COUNT(*) AS dem 
                 FROM Products 
                 WHERE Name LIKE :keyword 
                 AND Price BETWEEN :min_p AND :max_p 
                 AND Status = 1";
-
         $stmt = $this->pdo->prepare($sql);
-
-        // Ràng buộc tham số
         $keyw = '%' . $keyword . '%';
         $stmt->bindParam(':keyword', $keyw, PDO::PARAM_STR);
         $stmt->bindParam(':min_p', $min_price, PDO::PARAM_INT);
         $stmt->bindParam(':max_p', $max_price, PDO::PARAM_INT);
-
         $stmt->execute();
-
-        // Trả về số lượng sản phẩm
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data['dem'];
     }
@@ -750,7 +751,7 @@ class Database
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function sp_lien_quan($id, $so_luong)
+    public function sp_lien_quan($id, $so_luong)
     {
         $sql = "SELECT * FROM products WHERE Status = 1
         AND Category_ID in (SELECT Category_ID FROM products WHERE ID = :id1) AND ID <> :id2
@@ -763,7 +764,7 @@ class Database
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function binhluan_sp($ProductId)
+    public function binhluan_sp($ProductId)
     {
         $sql = "SELECT
                     r.ID, r.ID_User, r.ID_Product, r.Date, r.Status, r.Rating, r.Review,

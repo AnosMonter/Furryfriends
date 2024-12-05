@@ -1,14 +1,9 @@
 <main>
     <div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src="public/img/bn1.jpg" style="width: 100%">
-        </div>
-        <div class="mySlides fade">
-            <img src="public/img/bn2.jpg" style="width: 100%">
-        </div>
-        <div class="mySlides fade">
-            <img src="public/img/bn3.jpg" style="width: 100%">
-        </div>
+        <?php foreach ($Slide_Banner as $Banner) { ?>
+            <div class="mySlides fade">
+                <img src="<?= $Banner['Image'] ?>" style="width: 100%">
+            </div><?php } ?>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
@@ -79,7 +74,9 @@
                         <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                             <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                         </a>
-                        <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                        <div class="item-name">
+                            <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
+                        </div>
                         <div class="item-price">
                             <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                             <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -107,7 +104,9 @@
                         <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                             <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                         </a>
-                        <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                        <div class="item-name">
+                            <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
+                        </div>
                         <div class="item-price">
                             <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                             <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -133,7 +132,9 @@
                             <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                                 <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                             </a>
-                            <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                            <div class="item-name">
+                                <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
+                            </div>
                             <div class="item-price">
                                 <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                                 <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>
@@ -159,7 +160,9 @@
                                 <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                                     <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
                                 </a>
-                                <div class="item-name"><h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3></div>
+                                <div class="item-name">
+                                    <h3><a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>"><?php echo $sp['Name']; ?></a></h3>
+                                </div>
                                 <div class="item-price">
                                     <span><?php echo number_format($sp['Discount'], 0, ',', '.'); ?> Đ</span>
                                     <del><?php echo number_format($sp['Price'], 0, ',', '.'); ?> Đ</del>

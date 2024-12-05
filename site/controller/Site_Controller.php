@@ -8,6 +8,7 @@ class Site_Controller
     }
     public function trang_chu()
     {
+        $Slide_Banner = $this->Database->Get_All_Banner_By_Status(2);
         $banner_cho = $this->Database->getBannerById(3);
         $banner_cho_2 = $this->Database->getBannerById(2);
         $banner_meo = $this->Database->getBannerById(4);
