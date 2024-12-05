@@ -1,7 +1,7 @@
 <div class="container">
     <nav>
         <div class="nav-grid">
-            <li style="display:flex; justify-content: center; background-color: rgb(240,240,240);"><img width="200px" height="200px" src="public/img/logo.png" alt=""></li>
+            <li style="display:flex; justify-content: center; background-color: rgb(240,240,240);"><a href="index.php"><img width="200px" height="200px" src="public/img/logo.png" alt=""></a></li>
             <li id="<?php echo (isset($TitlePage) && $TitlePage == 'Thống Kê Doanh Thu') ? 'Select' : ''; ?>"><a href="admin.php?Page=thong_ke_doanh_thu"> Thống Kê Doanh Thu</a></li>
             <li id="<?php echo (isset($TitlePage) && $TitlePage == 'Quản Lý Tài Khoản') ? 'Select' : ''; ?>"><a href="admin.php?Page=quan_ly_tai_khoan"> Quản Lý Tài Khoản</a></li>
             <li id="<?php echo (isset($TitlePage) && $TitlePage == 'Quản Lý Danh Mục') ? 'Select' : ''; ?>"><a href="admin.php?Page=quan_ly_danh_muc">Quản Lý Danh Mục</a></li>
