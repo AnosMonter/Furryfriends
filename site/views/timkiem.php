@@ -1,7 +1,7 @@
 <main>
     <div class="kq-timkiem">
         <h2><?php echo $TitlePage; ?></h2>
-        <div class="filter-bar">
+        <div class="filter-bar"><?php if(!empty($results)) {?>
             <form method="GET" action="">
                 <input type="hidden" name="Page" value="tim_kiem">
                 <input type="hidden" name="Search" value="<?php echo isset($_GET['Search']) ? $_GET['Search'] : ''; ?>">
@@ -12,7 +12,10 @@
                     <option value="DESC" <?php echo (isset($_GET['sort_price']) && $_GET['sort_price'] == 'DESC') ? 'selected' : ''; ?>>Giá cao đến thấp</option>
                 </select>
                 <button type="submit">Lọc</button>
-            </form>
+            </form><?php } else { ?>
+                <div style="border: 1px solid black; border-radius: 10px; color: black; font-size: 30px; height: 100px; display: flex; justify-content: center; align-items: center; width: 100%;" class="khong-co-san-pham-nao">
+                    Không tìm thấy sản phẩm nào phù hợp với từ khóa "<?php echo isset($_GET['Search'])? $_GET['Search'] : '';?>". Vui lòng thử tìm kiếm lại.
+                </div><?php }?>
         </div>
 
         <div class="products">

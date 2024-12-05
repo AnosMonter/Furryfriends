@@ -268,7 +268,7 @@ class Site_Controller
             $results = $this->Database->tim_kiem_sp($keyword, $min_price, $max_price, $page_size, $page_num, $sort_price);
             $so_record = $this->Database->tim_kiem_dem($keyword, $min_price, $max_price);
             $so_trang = ceil($so_record / $page_size);
-            $TitlePage = "Kết quả cho '$keyword'";
+            $TitlePage = !empty($result)? "Kết quả cho '$keyword'":"Không Tìm Thấy Sản Phẩm Cho '$keyword'";
             $Views = 'site/views/timkiem.php';
             include_once 'site/views/layout.php';
         } else {
