@@ -15,6 +15,7 @@
                         <input type="email" name="email" placeholder="Email">
                         <input type="text" name="phone" placeholder="SĐT">
                         <textarea name="message" placeholder="Nội Dung"></textarea>
+                        <p id="warning" style="color:red; display:none;">Nội dung quá dài, tối đa 1000 từ.</p>
                         <button type="submit">Gửi Liên Hệ</button>
                     </form>
                 </div>
@@ -23,3 +24,17 @@
         </div>
     </div>
 </main>
+<script>
+  document.getElementById('message').addEventListener('input', function() {
+    var text = this.value;
+    var wordCount = text.split(/\s+/).filter(function(word) {
+      return word.length > 0; // Loại bỏ khoảng trắng không có chữ
+    }).length;
+
+    if (wordCount > 1000) {
+      document.getElementById('warning').style.display = 'block';
+    } else {
+      document.getElementById('warning').style.display = 'none';
+    }
+  });
+</script>
