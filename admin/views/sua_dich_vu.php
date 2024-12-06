@@ -33,6 +33,8 @@
     }
 </style>
 <main>
+    <h1 class="Title-Page-Main">Sửa Dịch Vụ</h1>
+
     <form action="admin.php?Page=sua_dich_vu&ID=<?php echo $service['ID']; ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Tên dịch vụ:</label>

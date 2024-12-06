@@ -164,13 +164,13 @@ nav li:hover {
     width: 100%;
     border: 2px solid #F7941D;
     padding: 0;
-    border-top: none;
     display: block;
     position: absolute;
     top: 50px;
 }
 
 .Category-List li {
+    white-space: nowrap;
     display: block;
     width: 100%;
     padding: 5px 10px;
@@ -958,25 +958,18 @@ footer {
 #btn-increase,
 #quantity {
     border: 1px solid #ccc;
-    /* Viền cho các ô */
     padding: 5px 12px;
-    /* Khoảng cách bên trong */
     font-size: 16px;
     text-align: center;
     background-color: transparent;
-    /* Không có nền */
     border-radius: 5px;
-    /* Bo góc nhẹ */
 }
 
 #quantity {
     width: 60px;
-    /* Đặt chiều rộng của ô số lượng */
     font-size: 16px;
     border-left: none;
-    /* Xóa viền trái */
     border-right: none;
-    /* Xóa viền phải */
     text-align: center;
     color: #333;
 }
@@ -994,14 +987,12 @@ footer {
 #btn-decrease:hover,
 #btn-increase:hover {
     background-color: #f0f0f0;
-    /* Màu nền khi hover */
     transform: scale(1.1);
 }
 
 .btn-add-cart-detail {
     padding: 10px 20px;
     background-color: #2687F9;
-    /* Màu nền của nút */
     color: white;
     border: none;
     border-radius: 5px;
@@ -1009,9 +1000,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* Khoảng cách giữa biểu tượng và văn bản */
     margin-left: 30px;
-    /* Khoảng cách giữa nút và ô tăng giảm */
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -1023,10 +1012,8 @@ footer {
 
 .btn-add-cart-detail i {
     font-size: 18px;
-    /* Tăng kích thước biểu tượng giỏ hàng */
 }
 
-/* responsive */
 @media(max-width: 768px) {
     #chi-tiet #row1 {
         grid-template-columns: 1fr;
@@ -1150,10 +1137,54 @@ footer {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    width: 50%;
     margin: 50px auto;
 }
+
+.box-page-forgot-password h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.box-page-forgot-password img {
+    display: block;
+    width: 25%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.Forgot-Pass-Log {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    span {
+        width: calc((100% - 10px) /2);
+        color: black;
+        margin: 10px auto;
+        font-weight: bolder;
+        font-size: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    a {
+        width: 100%;
+        margin: 5px auto;
+        font-size: 20px;
+        color: white;
+        padding: 10px;
+        background-color: #f7941d;
+        border-radius: 5px;
+        text-align: center;
+    }
+}
+
 
 .box-page-forgot-password form {
     display: flex;
@@ -1162,6 +1193,8 @@ footer {
 
 .box-page-forgot-password label {
     margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .box-page-forgot-password input[type="text"] {
@@ -1169,9 +1202,15 @@ footer {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .box-page-forgot-password input[type="submit"] {
+    width: 50%;
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -1181,22 +1220,33 @@ footer {
 }
 
 #reset-password-form {
-    width: 300px;
+    width: 50%;
     margin: 100px auto;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 
 }
 
 #reset-password-form h2 {
     text-align: center;
+    font-size: 40px;
     margin-bottom: 20px;
+}
+
+#reset-password-form img {
+    display: block;
+    width: 40%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 0 auto;
 }
 
 #reset-password-form label {
     display: block;
+    font-size: 20px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 #reset-password-form input[type="password"],
@@ -1215,6 +1265,10 @@ footer {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
 }
 
 /* ============================ Đăng Nhập Đăng Ký ============================ */
@@ -1257,7 +1311,7 @@ footer {
 .form-register input[type=text] {
     width: 100%;
     padding: 20px;
-    margin: 5px 0 ;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -1371,6 +1425,8 @@ footer {
     justify-content: center;
     text-align: center;
     padding: 20px;
+    font-size: 30px;
+    font-weight: bolder;
     flex-direction: column;
     background-color: #f9f9f9;
     border-radius: 5px 5px 0 0;
@@ -1388,7 +1444,7 @@ footer {
     display: block;
 }
 
-.error{
+.error {
     color: red;
     font-size: 16px;
     margin-top: 5px;

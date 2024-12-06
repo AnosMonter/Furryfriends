@@ -56,13 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function ShowDropdown() {
     const dropdown = document.querySelector('.dropdown');
     dropdown.style.display = 'block';
-    console.log('Hover');
 }
 
 function HideDropdown() {
     const dropdown = document.querySelector('.dropdown');
     dropdown.style.display = 'none';
-    console.log('Hide');
 }
 
 function updateQuantity(index, change) {

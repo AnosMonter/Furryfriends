@@ -1,45 +1,47 @@
 <style>
     form {
-    width: 100%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
+        width: 100%;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
 
-input[type="text"],
-input[type="number"],
-textarea,
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
 
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
 </style>
 <main>
+    <h1 class="Title-Page-Main">Sửa Bài Viết</h1>
+
     <form action="admin.php?Page=sua_bai_viet&ID=<?php echo $news['ID']; ?>" method="post" enctype="multipart/form-data">
         <label for="name">Tên tin tức:</label>
         <input type="text" id="name" name="name" value="<?php echo $news['Name']; ?>" required>

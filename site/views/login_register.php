@@ -1,6 +1,6 @@
 <main>
     <div class="Container">
-        <input type="checkbox" id="Log-Reg" <?= !empty($loi) ? 'checked' : '' ?>>
+        <input type="checkbox" id="Log-Reg"<?= isset($_GET['D']) == 1? 'checked':'' ?> <?= !empty($loi) ? 'checked' : '' ?>>
         <div class="box-login">
             <img width="400px"
                 src="public/img/Log_reg.jpg"

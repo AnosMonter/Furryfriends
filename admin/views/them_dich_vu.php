@@ -14,6 +14,7 @@
         }
         input[type="text"],
         input[type="number"],
+        input[type='file'],
         textarea {
             width: 100%;
             padding: 10px;
@@ -44,6 +45,8 @@
 </style>
 
 <main>
+<h1 class="Title-Page-Main">Thêm Dịch Vụ</h1>
+
     <form class="form-them-dich-vu" action="admin.php?Page=them_dich_vu" method="post" enctype="multipart/form-data">
         <label for="name">Tên dịch vụ:</label>
         <input type="text" id="name" name="name" required>

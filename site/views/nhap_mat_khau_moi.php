@@ -1,6 +1,7 @@
 <div class="Container">
     <form id="reset-password-form" action="index.php?Page=nhap_mat_khau_moi" method="post">
     <h2>Đặt lại mật khẩu</h2>
+    <img src="public/img/logo.png" alt="">
     <label for="new-password">Mật khẩu mới:</label>
         <input type="password" id="new-password" name="new_password" required>
 

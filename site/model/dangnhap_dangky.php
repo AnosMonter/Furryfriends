@@ -120,18 +120,18 @@ class Dang_Nhap_Dang_Ky
 
                 include_once 'system/lib/master/Sent_Mail.php';
                 Sent_Emal($email, 'Xác nhận đăng ký tài khoản', "
-                                    Furry Friends 
-
+                                    Furry Friends
+                                    <br>
                                     Xin chào,
-
+                                    <br>
                                     Cảm ơn bạn đã đăng ký tài khoản tại Furry Friends!
-
+                                    <br>    
                                     Mã xác nhận của bạn là: $code
-
+                                    <br>                                    
                                     Mã này có hiệu lực trong 5 phút. Vui lòng sử dụng mã để hoàn tất quá trình xác nhận tài khoản của bạn.
-
+                                    <br>
                                     Nếu bạn không yêu cầu đăng ký tài khoản, vui lòng bỏ qua email này.
-
+                                    <br>
                                     Trân trọng,
                                     Đội ngũ Furry Friends
                                     ");
