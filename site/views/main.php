@@ -97,9 +97,9 @@
         </div>
 
         <div class="all-products">
-            <h2 class="title_product">SẢN PHẨM KHUYẾN MÃI</h2>
+            <h2 class="title_product">SẢN PHẨM XEM NHIỀU</h2>
             <div class="products">
-                <?php foreach ($km_arr as $sp): ?>
+                <?php foreach ($xn_arr as $sp): ?>
                     <div class="product-item">
                         <a href="index.php?Page=chi_tiet&id=<?php echo $sp['ID']; ?>">
                             <img src="<?php echo $sp['Image']; ?>" alt="<?php echo $sp['Name']; ?>">
