@@ -1079,10 +1079,7 @@ footer {
 }
 
 #binh-luan .comm-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    min-height: 100px;
+    display: block;
 }
 
 #binh-luan .comm-container.no-comments {
@@ -1092,12 +1089,21 @@ footer {
     text-align: center;
 }
 
+#binh-luan .comment-list {
+    list-style-type: none; /* Bỏ ký hiệu mặc định (chấm tròn) của danh sách */
+    padding: 0;
+    margin: 0;
+}
+
 #binh-luan .comment {
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Khoảng cách giữa các bình luận */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của vùng chứa */
+    box-sizing: border-box;
 }
 
 #binh-luan .comment p {
