@@ -29,11 +29,6 @@
                     <input type="text" name="country" value="Việt Nam" required> <br>
                     <label for="">Ghi chú (tùy chọn)</label> <br>
                     <textarea name="ghi_chu_don_hang" id="notecart" value="<?php echo $NoteCart; ?>"></textarea>
-                    <label for="">Phương thức thanh toán</label> <br>
-                    <input type="radio" value="1" name="pttt" checked>Thanh toán khi nhận hàng
-                    <input type="radio" value="2" name="pttt">Chuyển khoản ngân hàng
-                    <input type="radio" value="3" name="pttt">Thanh toán online
-
             </div>
 
             <div class="col3">
