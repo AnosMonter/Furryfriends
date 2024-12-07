@@ -29,6 +29,8 @@
                     <input type="text" name="country" value="Việt Nam" required> <br>
                     <label for="">Ghi chú (tùy chọn)</label> <br>
                     <textarea name="ghi_chu_don_hang" id="notecart" value="<?php echo $NoteCart; ?>"></textarea>
+                    <p>Phương Thức Thanh Toán:</p><br>
+                    <label class="Payment-Bill" for="">Tiền Mặt <input type="radio" name="pttt" id="ThanhToan" value="1" checked> </label> <br>
             </div>
 
             <div class="col3">
@@ -58,13 +60,13 @@
                             <td style="display: none;"> </td>
                         </tr>';
                         foreach ($_SESSION['myCart']['listCart'] as $cart) {
-                            $ttien = $cart[3] * $cart[4];
+                            $ttien = $cart[6] * $cart[4];
                             $tong += $ttien;
                             $delCart = '<a href="index.php?Page=delcart&idcart=' . $i . '"><input type="button" class="btn-del-cart" value="Xóa"></a>';
                             echo '<tr>
                                 <td class="cart-col-product" style="display: none;"><img src="' . $cart[2] . '" height="80px"></td>
                                 <td class="cart-name-product">' . $cart[1] . '</td>
-                                <td class="cart-col-product">' . number_format($cart[3], 0, "", ".") . 'đ</td>
+                                <td class="cart-col-product">' . number_format($cart[6], 0, "", ".") . 'đ</td>
                                 <td class="cart-col-product">' . $cart[4] . '</td>
                                 <td class="cart-col-product" style="display: none;">' . number_format($ttien, 0, "", ".") . 'đ<?td>
                                 <td class="cart-col-product" style="display: none;">' . $delCart . '</td>

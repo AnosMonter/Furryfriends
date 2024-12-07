@@ -1090,7 +1090,8 @@ footer {
 }
 
 #binh-luan .comment-list {
-    list-style-type: none; /* Bỏ ký hiệu mặc định (chấm tròn) của danh sách */
+    list-style-type: none;
+    /* Bỏ ký hiệu mặc định (chấm tròn) của danh sách */
     padding: 0;
     margin: 0;
 }
@@ -1101,8 +1102,10 @@ footer {
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Khoảng cách giữa các bình luận */
-    width: 100%; /* Chiếm toàn bộ chiều rộng của vùng chứa */
+    margin-bottom: 20px;
+    /* Khoảng cách giữa các bình luận */
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của vùng chứa */
     box-sizing: border-box;
 }
 
@@ -2061,7 +2064,7 @@ footer {
 }
 
 .col3 {
-/*     margin-top: -200px; */
+    /*     margin-top: -200px; */
     float: right;
     width: 40%;
     margin-left: 60px;
@@ -2173,7 +2176,7 @@ footer {
     border-top: 2px #066EFF solid;
 }
 
-.col6 #thanh_toan input,
+.col6 #thanh_toan input[type="text"],
 .col6 #thanh_toan select {
     width: 100%;
     line-height: 30px;
@@ -2375,6 +2378,22 @@ footer {
 .Box-bill-confirm table tr,
 .Box-bill-confirm table td {
     border: 0;
+}
+
+.Payment-Bill {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+#ThanhToan{
+    height: 30px;
+    aspect-ratio: 1;
+    display: block;
 }
 
 /* ============================== Viết Đánh Giá =========================== */

@@ -59,11 +59,11 @@
                         $tong = 0;
 
                         foreach ($_SESSION['myCart']['listCart'] as $cart) {
-                            $ttien = $cart[3] * $cart[4];
+                            $ttien = $cart[6] * $cart[4];
                             $tong += $ttien;
                             echo '<tr>
                 <td >Tên sản phẩm</td>
-                <td>' . $cart[1] . '<br><span>' . $cart[4] . ' x ' . number_format($cart[3], 0, "", ".") . '</span></td>
+                <td>' . $cart[1] . '<br><span>' . $cart[4] . ' x ' . number_format($cart[6], 0, "", ".") . '</span></td>
             </tr>';
                         }
                         echo '

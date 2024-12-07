@@ -185,11 +185,11 @@
 </div>
 
 <div class="order-details">
-    <p><strong>Địa chỉ nhận hàng:</strong><?= $Get_Order['Address'] ?></p>
-    <p><strong>Tên người nhận:</strong><?= $Get_Order['Name'] ?></p>
-    <p><strong>Số điện thoại liên lạc:</strong><?= $Get_Order['Name'] ?></p>
-    <p><strong>Thời gian thanh toán:</strong><?= $Get_Order['Payment_Date'] ?></p>
-    <p><strong>Phương thức thanh toán:</strong><?= $Get_Order['Payment_Method'] == 1 && $Get_Order['Status_Order'] == 3 ? 'Tiền Mặt' : 'Chưa Thanh Toán' ?></p>
+    <p><strong>Địa chỉ nhận hàng:</strong> <?= $Get_Order['Address'] ?></p>
+    <p><strong>Tên người nhận:</strong> <?= $Get_Order['Name'] ?></p>
+    <p><strong>Số điện thoại liên lạc:</strong> <?= $Get_Order['Phone'] ?></p>
+    <p><strong>Thời gian thanh toán:</strong> <?= $Get_Order['Payment_Date']?? 'Chưa Thanh Toán' ?></p>
+    <p><strong>Phương thức thanh toán:</strong> <?= $Get_Order['Payment_Method'] == 1 && $Get_Order['Status_Order'] == 3 ? 'Tiền Mặt' : 'Chưa Thanh Toán' ?></p>
 </div>
 
 </div>
