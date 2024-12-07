@@ -639,9 +639,9 @@ class Database
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function sp_km($so_luong)
+    public function sp_xem_nhieu($so_luong)
     {
-        $sql = "SELECT * FROM products WHERE Discount > 0 && Discount < Price ORDER BY ID DESC LIMIT :sl";
+        $sql = "SELECT * FROM products WHERE Status = 1 ORDER BY Views DESC LIMIT :sl";
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':sl', $so_luong, PDO::PARAM_INT);
         $result->execute();
