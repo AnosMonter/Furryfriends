@@ -51,19 +51,20 @@
             <span class="toggle-btn">Xem thêm</span>
         </div>
         <div id="binh-luan">
-            <h2 class="title_product">Đánh giá</h2>
+            <h2 class="title_comment">Đánh giá</h2>
             <div class="comm-container <?= empty($binhluan_arr) ? 'no-comments' : ''; ?>">
                 <?php if (!empty($binhluan_arr)): ?>
-                    <?php foreach ($binhluan_arr as $binhluan): ?>
-                        <div class="comment">
-                            <p><strong><?= htmlspecialchars($binhluan['UserName']); ?></strong> (<?= $binhluan['Date']; ?>):</p>
-                            <p>Rating: <?= $binhluan['Rating']; ?> ⭐</p>
-                            <p><?= htmlspecialchars($binhluan['Review']); ?></p>
-                            <hr>
-                        </div>
-                    <?php endforeach; ?>
+                    <ul class="comment-list">
+                        <?php foreach ($binhluan_arr as $binhluan): ?>
+                            <li class="comment">
+                                <p><strong><?= htmlspecialchars($binhluan['UserName']); ?></strong> (<?= $binhluan['Date']; ?>):</p>
+                                <p>Rating: <?= $binhluan['Rating']; ?> ⭐</p>
+                                <p><?= htmlspecialchars($binhluan['Review']); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php else: ?>
-                    <p class="notCmt">Chưa có bình luận nào cho sản phẩm này.</p>
+                    <p class="notCmt">Chưa có đánh giá nào cho sản phẩm này.</p>
                 <?php endif; ?>
             </div>
         </div>
