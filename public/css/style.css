@@ -1061,9 +1061,9 @@ footer {
 .title_comment {
     background-color: #F7941D;
     color: white;
-    margin: 20px 30px;
+    margin: 0 auto 20px;
     padding: 10px 30px;
-    display: inline-block;
+    display: block;
     border-radius: 50px;
     text-align: center;
     width: 400px;
@@ -1075,7 +1075,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
-    text-align: center;
+    position: relative;
 }
 
 #binh-luan .comm-container {
