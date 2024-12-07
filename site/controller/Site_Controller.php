@@ -14,7 +14,7 @@ class Site_Controller
         $banner_meo = $this->Database->getBannerById(4);
         $banner_meo_2 = $this->Database->getBannerById(1);
         $moi_arr = $this->Database->sp_moi(8);
-        $km_arr = $this->Database->sp_km(8);
+        $xn_arr = $this->Database->sp_xem_nhieu(8);
         $sp_cho_arr = $this->Database->sp_cho(8);
         $sp_meo_arr = $this->Database->sp_meo(8);
         $dm_arr = $this->Database->danh_muc(6);
