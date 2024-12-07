@@ -230,7 +230,9 @@ class Admin_Controller
     public function quan_ly_danh_muc_bai_viet()
     {
         $TitlePage = 'Quản Lý Danh Mục Bài Viết';
-        $list_categories = $this->Import_Database->Get_All_News_Categories();
+        $limit = 10;
+        $Page = isset($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
+        $list_categories_news = $this->Import_Database->Get_News_Category_By_Page($Page, $limit);
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
         include_once 'admin/views/quan_ly_danh_muc_bai_viet.php';
@@ -268,9 +270,20 @@ class Admin_Controller
         $Model_Cat->Delete_News_Category();
         header('location: admin.php?Page=quan_ly_danh_muc_bai_viet');
     }
+
+    public function an_hien_danh_muc_bai_viet()
+    {
+        if (isset($_GET['ID']) && !empty($_GET['ID'])) {
+            if ($this->Import_Database->Show_Hide_News_Category($_GET['ID'])) {
+                header('location: admin.php?Page=quan_ly_danh_muc_bai_viet');
+            } else {
+                echo 'Không thể ẩn/hiện danh mục này';
+            }
+        }
+    }
     public function quan_ly_bai_viet()
     {
-        $TitlePage = 'Quản Lý Tin Tức';
+        $TitlePage = 'Quản Lý Bài Viết';
         $Limit = 5;
         $Page_num = isset($_GET['Page_Num']) ? $_GET['Page_Num'] : 1;
         $offset = ($Page_num - 1) * $Limit;
@@ -325,16 +338,16 @@ class Admin_Controller
     }
 
 
-    public function quan_ly_binh_luan_tin_tuc()
+    public function quan_ly_binh_luan_bai_viet()
     {
-        $TitlePage = 'Quản Lý Bình Luận Tin Tức';
+        $TitlePage = 'Quản Lý Bình Luận Bài Viết';
         $comments = $this->Import_Database->Get_All_Comments();
         include_once 'admin/views/header.php';
         include_once 'admin/views/nav.php';
         include_once 'admin/views/quan_ly_binh_luan_tin_tuc.php';
     }
 
-    public function xoa_binh_luan_tin_tuc()
+    public function xoa_binh_luan_bai_viet()
     {
         $comment_id = isset($_GET['ID']) ? $_GET['ID'] : 0;
         if ($this->Import_Database->Delete_Comment($comment_id)) {

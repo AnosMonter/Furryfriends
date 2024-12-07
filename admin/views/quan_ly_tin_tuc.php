@@ -75,7 +75,7 @@
     }
 </style>
 <main>
-    <h1 class="Title-Page-Main">Quản Lý Tin Tức</h1>
+    <h1 class="Title-Page-Main">Quản Lý Bài Viết</h1>
     <div class="Post-Manager">
         <a class="Them_bai_viet" href="admin.php?Page=them_bai_viet">Thêm Tin Tức</a>
         <table border="1">

@@ -371,11 +371,21 @@ class Database
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    /* ====================== Danh Mục Tin Tức ============================ */
+    /* ====================== Danh Mục Bài Viết ============================ */
     public function Get_All_News_Categories()
     {
         $query = "SELECT * FROM news_categories";
         $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Get_News_Category_By_Page($page, $limit){
+        $offset = $limit * ($page - 1);
+        $query = "SELECT * FROM news_categories LIMIT :limit OFFSET :offset";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -413,6 +423,15 @@ class Database
         $query = "DELETE FROM news_categories WHERE ID = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function Show_Hide_News_Category($id){
+        $status = ($this->Get_News_Category_By_ID($id)['Status'] == 1)? 0 : 1;
+        $query = "UPDATE news_categories SET Status = :status WHERE ID = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
