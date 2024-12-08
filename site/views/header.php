@@ -32,7 +32,7 @@
                     <ul style="z-index: 99;" class="dropdown" onmouseleave="HideDropdown()">
                         <li><a href="index.php?Page=dang_xuat">Đăng Xuất</a></li>
                         <li><a href="index.php?Page=chinh_sua_thong_tin">Thay Đổi Thông Tin</a></li>
-                        <li><a href="index.php?Page=xem_don_hang">Quản Lý Đơn Hàng</a></li>
+                        <li><a href="index.php?Page=xem_don_hang">Xem Đơn Hàng</a></li>
                         <?= isset($_SESSION["User_login"]["ID"]) && $_SESSION["User_login"]["Role"] == 1 ? '<li><a href="admin.php">Đi Đến Trang Quản Trị</a></li>' : '' ?>
                     </ul>
                 </a>

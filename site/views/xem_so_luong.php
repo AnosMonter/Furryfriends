@@ -173,7 +173,7 @@
         <tfoot>
             <tr>
                 <td><?php if ($Get_Order['Status_Order'] <= 1) { ?>
-                        <a href="index.php?Page=huy_don_hang&ID=<?= $Get_Order['ID'] ?>&Status=4" onclick="return confirm('Bạn Có Chắc Muốn Hủy Đơn?')">Hủy Đơn</a>
+                        <a style="width: 100%; background-color: rgba(255,50,50,.9); padding: 5px 10px; border-radius: 10px; color: white; " href="index.php?Page=huy_don_hang&ID=<?= $Get_Order['ID'] ?>&Status=4" onclick="return confirm('Bạn Có Chắc Muốn Hủy Đơn?')">Hủy Đơn</a>
                     <?php } ?>
                 </td>
                 <td colspan="2">Tổng Thanh Toán</td>
