@@ -354,13 +354,14 @@ class Site_Controller
             $Quantity = $_POST['Quantity'];
             (int) $ttien = $Quantity * $Discount;
             $found = false;
+            if (isset($_SESSION['myCart']['listCart']) || !empty($_SESSION['myCart']['listCart'])) {
             foreach ($_SESSION['myCart']['listCart'] as $item) {
                 if ($item[0] === $ID) {
                     $item[4] += $Quantity;
                     $item[5] = $item[4] * (int)$Discount;
                     $found = true;
                 }
-            }
+            }}
 
             if ($found) {
                 $item[4] += $Quantity;
@@ -390,9 +391,11 @@ class Site_Controller
             $_SESSION['myCart']['listCart'] = array_values($_SESSION['myCart']['listCart']);
         }
         $totalPrice = 0;
-        foreach ($_SESSION['myCart']['listCart'] as $item) {
+        if (isset($_SESSION['myCart']['listCart']) || !empty($_SESSION['myCart']['listCart'])) {
+       foreach ($_SESSION['myCart']['listCart'] as $item) {
             $totalPrice += $item[5];
         }
+    }
         $_SESSION['totalPrice'] = $totalPrice;
         $Views = 'site/views/gio_hang.php';
         include_once 'site/views/layout.php';
@@ -408,7 +411,9 @@ class Site_Controller
     }
     public function kiem_tra_thanh_toan()
     {
-        if (!isset($_SESSION['User_login'])) {
+        if (empty($_SESSION['myCart']['listCart'])) {
+            header("Location: index.php?Page=gio_hang");
+            exit();
         }
         if (!isset($_SESSION['User_login'])) {
             echo "<script type='text/javascript'>alert('Bạn cần phải đăng nhập trước');</script>";
@@ -424,50 +429,108 @@ class Site_Controller
         include_once 'site/views/layout.php';
     }
     public function bill_confirm()
-    {
-        if (isset($_POST['dongydathang']) && $_POST['dongydathang']) {
+{      if (empty($_SESSION['myCart']['listCart'])) {
+    header("Location: index.php?Page=gio_hang");
+    exit();
+}
+    if (isset($_POST['dongydathang']) && $_POST['dongydathang']) {
 
-            $username = $_POST['name'];
-            $address = $_POST['address'];
-            $phone = $_POST['phone'];
-            $ngaydathang = date('h:i:sa d/m/Y');
-            $pttt = $_POST['pttt'];
-            $tongdonhang = $_POST['tong'];
-            $email = $_POST['email'];
-            $ghi_chu = $_POST['ghi_chu_don_hang'];
+        $username = $_POST['name'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $ngaydathang = date('h:i:sa d/m/Y');
+        $pttt = $_POST['pttt'];
+        $tongdonhang = $_POST['tong'];
+        $email = $_POST['email'];
+        $ghi_chu = $_POST['ghi_chu_don_hang'];
 
-            if (!isset($_SESSION['myCart']['infoOrder']) || empty($_SESSION['myCart']['infoOrder'])) {
-                $addToOrder = [$username, $address, $phone, $ngaydathang, $pttt, $tongdonhang, $email, $ghi_chu];
-                $_SESSION['myCart']['infoOrder'][] = $addToOrder;
-            } else {
-                echo "<script type='text/javascript'>alert('Thông tin đơn hàng đã được thêm trước đó!');</script>";
-            }
+        if (!isset($_SESSION['myCart']['infoOrder']) || empty($_SESSION['myCart']['infoOrder'])) {
+            $addToOrder = [$username, $address, $phone, $ngaydathang, $pttt, $tongdonhang, $email, $ghi_chu];
+            $_SESSION['myCart']['infoOrder'][] = $addToOrder;
+
         }
-        $Views = 'site/views/bill_confirm.php';
-        include_once 'site/views/layout.php';
     }
+
+    $Views = 'site/views/bill_confirm.php';
+    include_once 'site/views/layout.php';
+}
+
     function xoa_thong_tin_don_hang()
     {
         unset($_SESSION['myCart']['infoOrder']);
         header('location:index.php?Page=kiem_tra_thanh_toan');
     }
     function xac_nhan_dat_hang()
-    {
-        if (isset($_POST['xacnhandathang']) && $_POST['xacnhandathang']) {
-            require_once 'site/model/cart.php';
-            $this->Database = new Database;
-            if (function_exists('insertOrder')) {
-                insertOrder($this->Database);
-                header('location:index.php?Page=dat_hang_thanh_cong');
-            } else {
-                echo "Hàm insertOrder chưa được định nghĩa!";
-            }
-            $Views = 'site/views/xac_nhan_dat_hang.php';
-            include_once 'site/views/layout.php';
+{
+    if (isset($_POST['xacnhandathang']) && $_POST['xacnhandathang']) {
+        require_once 'site/model/cart.php';
+        $this->Database = new Database;
+        
+        if (function_exists('insertOrder')) {
+            insertOrder($this->Database);
+        } else {
+            echo "Đặt hàng thất bại!";
         }
+        include_once 'system/lib/master/Sent_Mail.php';
+
+        $username = $_POST['name'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $ngaydathang = $_POST['ngay_mua_hang'];
+        $pttt = $_POST['pttt'];
+        $tongdonhang = $_POST['tong'];
+        $email = $_POST['email'];
+        $ghi_chu = $_POST['ghi_chu_don_hang'];
+
+        if (!isset($_SESSION['myCart']['infoOrder']) || empty($_SESSION['myCart']['infoOrder'])) {
+            $addToOrder = [
+                'Họ tên' => $username,
+                'Địa chỉ' => $address,
+                'Số điện thoại' => $phone,
+                'Ngày đặt hàng' => $ngaydathang,
+                'Phương thức thanh toán' => $pttt,
+                'Tổng đơn hàng' => $tongdonhang,
+                'Email' => $email,
+                'Ghi chú' => $ghi_chu
+            ];
+            $_SESSION['myCart']['infoOrder'][] = $addToOrder;
+
+            $emailSubject = "Xác nhận đơn hàng #" . uniqid();
+            $emailContent = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Xác nhận đơn hàng</title></head><body>";
+            $emailContent .= "<h2>Cảm ơn bạn đã đặt hàng tại cửa hàng chúng tôi!</h2>";
+            $emailContent .= "<p>Thông tin đơn hàng:</p>";
+            $emailContent .= "<p><b>Họ tên:</b> $username</p>";
+            $emailContent .= "<p><b>Địa chỉ:</b> $address</p>";
+            $emailContent .= "<p><b>Số điện thoại:</b> $phone</p>";
+            $emailContent .= "<p><b>Email:</b> $email</p>";
+            $emailContent .= "<p><b>Ngày đặt hàng:</b> $ngaydathang</p>";
+            if ($pttt == 1) {$emailContent .= "<p><b>Phương thức thanh toán:</b> Thanh toán khi nhận hàng</p>";} else{
+                $emailContent .= "<p><b>Phương thức thanh toán:</b> Liên hệ với chúng tôi 090 5151 999</p>";
+            }
+            $emailContent .= "<p><b>Tổng đơn hàng:</b> " . number_format($tongdonhang, 0, '', '.') . "đ</p>";
+            if (!empty($ghi_chu)) {
+                $emailContent .= "<p><b>Ghi chú:</b> $ghi_chu</p>";
+            }
+            $emailContent .= "<p>Chúng tôi sẽ liên hệ với bạn sớm để xác nhận đơn hàng. Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi!</p>";
+            $emailContent.= "<img src='https://i.pinimg.com/736x/cd/c5/35/cdc5359e05829e22c8ecb9b3c6cd04ab.jpg'>";
+            $emailContent .= "<p style='text-align: center';>Địa Chỉ: 116 Nguyễn Văn Thủ, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam
+                                <br> Hotline: 090 5151 999
+                                <br>Email: websitefurryfriends@gmail.com
+                                <br>Website: <a style='text-decoration: none; color: #F7941D;' href='http://furryfriends.io.vn/'>Furry Friends</a></p>";
+            $emailContent .= "</body></html>";
+
+            Sent_Emal($email, $emailSubject, $emailContent);
+        } else {
+            echo "<script type='text/javascript'>alert('Thông tin đơn hàng đã được thêm trước đó!');</script>";
+        }
+
+        header('Location: index.php?Page=dat_hang_thanh_cong');
+        exit();
     }
+}
     public function dat_hang_thanh_cong()
     {
+        
         $Views = 'site/views/dat_hang_thanh_cong.php';
         include_once 'site/views/layout.php';
     }
