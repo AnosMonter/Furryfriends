@@ -25,28 +25,30 @@
                         <?php foreach ($_SESSION['myCart']['infoOrder'] as $info) {
                             echo '<tr>
                             <td class="left">Họ và tên:</td>
-                            <td>' . $info[0] . '</td>
+                            <td><input type="hidden" name="name" value="' . $info[0] . '">' . $info[0] . '</td>
                         </tr>
                         <tr>
-                            <td class="left">Số điện thoại:</td>
-                            <td>' . $info[2] . '</td>
-                        </tr>
-                        <tr>
-                            <td class="left">Email:</td>
-                            <td>' . $info[6] . '</td>
-                        </tr>
-                        <tr>
-                            <td class="left">Địa chỉ:</td>
-                            <td>' . $info[1] . '</td>
-                        </tr>
-                        <?php if (!empty($info[7])): ?>
-                        <tr>
-                            <td class="left">Ghi chú:</td>
-                            <td><?php echo htmlspecialchars($info[7]); ?></td>
-                        </tr>
-                        <?php endif; ?>
-                </table>';
+                                <td class="left">Số điện thoại:</td>
+                                <td><input type="hidden" name="phone" value="' . $info[2] . '">' . $info[2] . '</td>
+                            </tr>
+                            <tr>
+                                <td class="left">Email:</td>
+                                <td><input type="hidden" name="email" value="' . $info[6] . '">' . $info[6] . '</td>
+                            </tr>
+                            <tr>
+                                <td class="left">Địa chỉ:</td>
+                                <td><input type="hidden" name="address" value="' . $info[1] . '">' . $info[1] . '</td>
+                            </tr>';
+
+                        if (!empty($info[6])) {
+                            echo '<tr>
+                                    <td class="left">Ghi chú:</td>
+                                    <td><input type="hidden" name="ghi_chu_don_hang" value="' . $info[7] . '">' . $info[7] . '</td>
+                                </tr>';
                         }
+
+                        echo '</table>';
+                    }
 
                         ?>
 
@@ -69,7 +71,8 @@
                         echo '
             <tr>
             <td>Ngày mua hàng</td>
-            <td>' . $info[3] . '</td>
+            <td><input type="hidden" name="pttt" value="' . $info[4] . '">
+            <input type="hidden" name="ngay_mua_hang" value="' . $info[3] . '">' . $info[3] . '</td>
             </tr>
                     
             ';
