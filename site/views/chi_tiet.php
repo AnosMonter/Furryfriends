@@ -27,18 +27,17 @@
                 </p>
                 <p><span style="font-weight: 800; font-size: 22px;">Mô tả: </span><?php echo nl2br($row['Description']); ?></p>
                 <div id="quantity-container">
-                    <button id="btn-decrease" class="btn" onclick="updateQuan(-1)">-</button>
-                    <input type="text" id="quantity" value="1" readonly>
-                    <button id="btn-increase" class="btn" onclick="updateQuan(1)">+</button>
                     <form action="index.php?Page=gio_hang" method="post">
-                        <input type="hidden" name="ID" value="<?php echo $row['ID']; ?>">
-                        <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>">
-                        <input type="hidden" name="Image" value="<?php echo $row['Image']; ?>">
-                        <input type="hidden" name="Discount" value="<?php echo $row['Discount']; ?>">
-                        <input type="hidden" name="Price" value="<?php echo $row['Price']; ?>">
-                        <input type="hidden" name="Quantity" value="1">
-                        <button type="submit" class="btn-add-cart-detail" name>Chọn Mua<i class="fa-solid fa-cart-shopping"></i></button></p>
-                    </form>
+                    <input type="hidden" name="ID" value="<?php echo $row['ID']; ?>">
+                    <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>">
+                    <input type="hidden" name="Image" value="<?php echo $row['Image']; ?>">
+                    <input type="hidden" name="Discount" value="<?php echo $row['Discount']; ?>">
+                    <input type="hidden" name="Price" value="<?php echo $row['Price']; ?>">
+                    <button id="btn-decrease" class="btn" onclick="updateQuan(event, -1)">-</button>
+                    <input type="text" id="quantity" value="1" name="Quantity" readonly>
+                    <button id="btn-increase" class="btn" onclick="updateQuan(event, 1)">+</button>
+                    <button type="submit" class="btn-add-cart-detail" name="submit">Thêm vào giỏ hàng<i class="fa-solid fa-cart-shopping"></i></button>
+                </form>
                 </div>
             </div>
         </div>
