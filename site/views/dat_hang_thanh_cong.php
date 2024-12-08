@@ -71,3 +71,10 @@
         </div>
     </div>
 </main>
+
+<script>
+    alert('Đơn hàng đã được ghi nhận! Bạn sẽ được chuyển về trang chủ sau 10 giây.');
+    setTimeout(function() {
+        window.location.href = 'index.php';
+    }, 10000);
+</script>
