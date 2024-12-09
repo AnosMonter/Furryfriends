@@ -6,7 +6,7 @@ class Database
     {
         require_once 'config.php';
         try {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME.";charset=utf8";
             $this->pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -34,7 +34,7 @@ class Database
             $sql = "UPDATE orders SET Status_Order = :status WHERE ID = :id";
         }
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
@@ -52,7 +52,7 @@ class Database
     public function Get_Total_Order_By_Date($date)
     {
         $stmt = $this->pdo->prepare("SELECT SUM(Total) AS 'Doanh Thu' FROM orders WHERE Date(Payment_Date) = :date");
-        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':date', $date, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -730,7 +730,7 @@ class Database
     public function tim_kiem_sp($keyword, $min_price = 0, $max_price = PHP_INT_MAX, $page_size = 6, $page_num = 1, $order = 'ASC')
     {
         $start = ($page_num - 1) * $page_size;
-        $sql = "SELECT * FROM Products WHERE Name LIKE :keyword AND Price BETWEEN :min_p AND :max_p AND Status = 1 ORDER BY Price $order LIMIT :start, :page_size";
+        $sql = "SELECT * FROM products WHERE Name LIKE :keyword AND Price BETWEEN :min_p AND :max_p AND Status = 1 ORDER BY Price $order LIMIT :start, :page_size";
         $stmt = $this->pdo->prepare($sql);
         $keyw = '%' . $keyword . '%';
         $stmt->bindParam(':keyword', $keyw, PDO::PARAM_STR);
@@ -745,7 +745,7 @@ class Database
     public function tim_kiem_dem($keyword, $min_price = 0, $max_price = PHP_INT_MAX)
     {
         $sql = "SELECT COUNT(*) AS dem 
-                FROM Products 
+                FROM products 
                 WHERE Name LIKE :keyword 
                 AND Price BETWEEN :min_p AND :max_p 
                 AND Status = 1";
